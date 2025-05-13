@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'screen/login.dart';
+import 'screen/homepage.dart';
 
 final Map<String, WidgetBuilder> appRoutes = {
-  '/login': (context) => LoginScreenWidget(),
+  '/login': (context) => LoginScreen(),
+  '/home': (context) => KoperasiApp(),
 };
