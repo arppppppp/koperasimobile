@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
-class Iphone13mini8Widget extends StatefulWidget {
+class LoginScreenWidget extends StatefulWidget {
   @override
-  _Iphone13mini8WidgetState createState() => _Iphone13mini8WidgetState();
+  _LoginScreenWidgetState createState() => _LoginScreenWidgetState();
 }
 
-class _Iphone13mini8WidgetState extends State<Iphone13mini8Widget> {
+class _LoginScreenWidgetState extends State<LoginScreenWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
