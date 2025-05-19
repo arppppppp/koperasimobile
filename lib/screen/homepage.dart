@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'simpanan_screen.dart';
 import 'notification_screen.dart';
+import 'profile_screen.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(
@@ -60,7 +61,7 @@ class _MainScreenWrapperState extends State<MainScreenWrapper> {
     const Center(child: Text('Pinjaman')),
     const HomePage(),
     const Center(child: Text('History')),
-    const Center(child: Text('Profile')),
+    const ProfileScreen(),
   ];
 
   void _onItemTapped(int index) {
