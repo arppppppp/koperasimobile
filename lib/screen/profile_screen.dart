@@ -8,24 +8,23 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  final TextEditingController emailController = TextEditingController(text: 'user@contoh.com');
-  final TextEditingController alamatController = TextEditingController(text: 'Jl. Contoh No.123');
-  final TextEditingController telpController = TextEditingController(text: '08123456789');
+  final emailController = TextEditingController(text: 'user@contoh.com');
+  final alamatController = TextEditingController(text: 'Jl. Contoh No.123');
+  final telpController   = TextEditingController(text: '08123456789');
 
-  bool isEditingEmail = false;
-  bool isEditingAlamat = false;
-  bool isEditingTelp = false;
+  bool isEditing = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[100],
+      resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: Column(
           children: [
-            // AppBar Custom
+            // ---------------- APP BAR ----------------
             Container(
-              color: Colors.yellow[700],
+              color: const Color(0xFFFFDC16),
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               child: Row(
                 children: [
@@ -36,7 +35,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   const SizedBox(width: 8),
                   const Text(
                     'Profile',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black),
                   ),
                 ],
               ),
@@ -44,77 +46,40 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
             const SizedBox(height: 16),
 
-            // Foto Profil
+            // ---------------- FOTO PROFIL ----------------
             Stack(
-              alignment: Alignment.bottomCenter,
+              clipBehavior: Clip.none,
               children: [
-                const CircleAvatar(
-                  radius: 50,
-                  backgroundColor: Colors.grey,
-                  child: Icon(Icons.person, size: 50, color: Colors.white),
+                InkWell(
+                  onTap: () => Navigator.pop(context),
+                  borderRadius: BorderRadius.circular(50),
+                  child: const CircleAvatar(
+                    radius: 50,
+                    backgroundColor: Colors.grey,
+                    child: Icon(Icons.person, size: 50, color: Colors.white),
+                  ),
                 ),
+                // ikon kamera di pojok kanan‑bawah
                 Positioned(
-                  bottom: 4,
+                  right: -2,
+                  bottom: -2,
                   child: CircleAvatar(
-                    radius: 15,
-                    backgroundColor: Colors.yellow[700],
-                    child: const Icon(Icons.camera_alt, size: 16, color: Colors.black),
+                    radius: 18,
+                    backgroundColor: const Color(0xFFFFDC16),
+                    child: const Icon(Icons.camera_alt,
+                        size: 18, color: Colors.black),
                   ),
                 ),
               ],
             ),
 
-            const SizedBox(height: 24),
+            const SizedBox(height: 16),
 
-            // Kartu Data Profil
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(16),
-                  boxShadow: [
-                    BoxShadow(color: Colors.black12, blurRadius: 4, offset: Offset(0, 2))
-                  ],
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text('Nama : Ujang Pucung'),
-                    const Divider(),
-                    const Text('NIP : 1234567890'),
-                    const Divider(),
-                    const Text('Jenis Kelamin : Laki-laki'),
-                    const Divider(),
-
-                    _buildEditableField(
-                      label: 'Email',
-                      controller: emailController,
-                      isEditing: isEditingEmail,
-                      onEdit: () => setState(() => isEditingEmail = !isEditingEmail),
-                    ),
-                    const Divider(),
-
-                    _buildEditableField(
-                      label: 'Alamat',
-                      controller: alamatController,
-                      isEditing: isEditingAlamat,
-                      onEdit: () => setState(() => isEditingAlamat = !isEditingAlamat),
-                    ),
-                    const Divider(),
-
-                    _buildEditableField(
-                      label: 'No Telp',
-                      controller: telpController,
-                      isEditing: isEditingTelp,
-                      onEdit: () => setState(() => isEditingTelp = !isEditingTelp),
-                    ),
-                    const Divider(),
-
-                    const Text('Tanggal Daftar : 01 Januari 2024'),
-                  ],
-                ),
+            // ---------------- BADAN YANG BISA SCROLL ----------------
+            Expanded(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.only(left: 20, right: 20, bottom: 24),
+                child: _profileCard(context),
               ),
             ),
           ],
@@ -123,33 +88,109 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  Widget _buildEditableField({
-    required String label,
-    required TextEditingController controller,
-    required bool isEditing,
-    required VoidCallback onEdit,
-  }) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Expanded(
-          child: isEditing
-              ? TextField(
-                  controller: controller,
-                  decoration: InputDecoration(
-                    labelText: label,
-                    isDense: true,
-                    contentPadding: const EdgeInsets.symmetric(vertical: 4),
-                  ),
-                )
-              : Text('$label : ${controller.text}'),
-        ),
-        IconButton(
-          icon: Icon(isEditing ? Icons.check : Icons.edit, size: 18),
-          onPressed: onEdit,
-          color: Colors.grey[700],
-        ),
-      ],
+  // ---------------- WIDGET KARTU PROFIL ----------------
+  Widget _profileCard(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.fromLTRB(16, 20, 16, 8),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: const [
+          BoxShadow(color: Colors.black12, blurRadius: 4, offset: Offset(0, 2))
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // HEADER + TOMBOL EDIT / CLOSE
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text('Data Profil',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+              IconButton(
+                icon: Icon(isEditing ? Icons.close : Icons.edit,
+                    color: Colors.grey[700]),
+                onPressed: () => setState(() => isEditing = !isEditing),
+              )
+            ],
+          ),
+          const Divider(),
+
+          _staticText('Nama', 'Ujang Pedro'),
+          _staticText('NIP', '123456789'),
+          _staticText('Jenis Kelamin', 'Laki-laki'),
+          const Divider(),
+
+          _editableField(
+              label: 'Email', controller: emailController, enabled: isEditing),
+          const Divider(),
+
+          _editableField(
+              label: 'Alamat', controller: alamatController, enabled: isEditing),
+          const Divider(),
+
+          _editableField(
+              label: 'No Telp', controller: telpController, enabled: isEditing),
+          const Divider(),
+
+          _staticText('Tanggal Daftar', '01 Januari 2024'),
+
+          // ---------- TOMBOL KONFIRMASI ----------
+          if (isEditing)
+            Padding(
+              padding: const EdgeInsets.only(top: 16),
+              child: SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFFFFDC16),
+                      foregroundColor: Colors.black),
+                  onPressed: () {
+                    // TODO: simpan ke backend
+                    setState(() => isEditing = false);
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text('Perubahan profil berhasil disimpan')));
+                  },
+                  child: const Text('Konfirmasi Perubahan'),
+                ),
+              ),
+            ),
+        ],
+      ),
     );
   }
+
+  // ---------------- UTILITAS ----------------
+  Widget _editableField(
+      {required String label,
+      required TextEditingController controller,
+      required bool enabled}) {
+    return enabled
+        ? TextField(
+            controller: controller,
+            decoration: InputDecoration(labelText: label, isDense: true),
+          )
+        : _staticText(label, controller.text);
+  }
+
+  // ••• LABEL–VALUE RAPI DUA KOLOM •••
+  Widget _staticText(String label, String value) => Padding(
+        padding: const EdgeInsets.symmetric(vertical: 6),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              width: 110, // lebar kolom label (atur sesuai kebutuhan)
+              child: Text(label,
+                  style: const TextStyle(fontWeight: FontWeight.w500)),
+            ),
+            const Text(' : '),
+            Expanded(
+              child: Text(value,
+                  style: const TextStyle(fontWeight: FontWeight.w400)),
+            ),
+          ],
+        ),
+      );
 }
