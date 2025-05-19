@@ -252,7 +252,6 @@ class _SimpananScreenState extends State<SimpananScreen> with SingleTickerProvid
             'Total simpanan sukarela yang telah dibayarkan',
           ),
           const SizedBox(height: 16),
-          _buildActionButtons(),
           const SizedBox(height: 24),
           _buildSectionHeader('Informasi Simpanan Sukarela'),
           const SizedBox(height: 16),
@@ -433,75 +432,6 @@ class _SimpananScreenState extends State<SimpananScreen> with SingleTickerProvid
           ),
         ],
       ),
-    );
-  }
-
-  // Action Buttons for Simpanan Sukarela
-  Widget _buildActionButtons() {
-    return Row(
-      children: [
-        Expanded(
-          child: ElevatedButton(
-            onPressed: () {
-              // Add deposit action
-            },
-            style: ElevatedButton.styleFrom(
-              padding: const EdgeInsets.symmetric(vertical: 12),
-              elevation: 0,
-              backgroundColor: const Color(0xFF4CAF50),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
-              ),
-            ),
-            child: const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.add, color: Colors.white, size: 20),
-                SizedBox(width: 8),
-                Text(
-                  'Setor',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-        const SizedBox(width: 16),
-        Expanded(
-          child: ElevatedButton(
-            onPressed: () {
-              // Add withdrawal action
-            },
-            style: ElevatedButton.styleFrom(
-              padding: const EdgeInsets.symmetric(vertical: 12),
-              elevation: 0,
-              backgroundColor: const Color(0xFFFF9800),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
-              ),
-            ),
-            child: const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.remove, color: Colors.white, size: 20),
-                SizedBox(width: 8),
-                Text(
-                  'Tarik',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ],
     );
   }
 }
