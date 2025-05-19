@@ -91,12 +91,16 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
             child: Container(
               width: 36,
               height: 36,
-              decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.3),
-                shape: BoxShape.circle,
-                border: Border.all(color: Colors.white, width: 0.5),
-              ),
-              child: const Icon(Icons.arrow_back, color: Color(0xFF4E342E), size: 20),
+                    child: IconButton(
+                      icon: const Icon(Icons.arrow_back, color: Color(0xFF4E342E)),
+                      onPressed: () {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (context) => const KoperasiApp()),
+                        );
+                      },
+                      splashRadius: 24,
+                    ),
             ),
           ),
           const SizedBox(width: 16),

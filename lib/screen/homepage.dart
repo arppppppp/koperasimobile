@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'simpanan_screen.dart';
 import 'notification_screen.dart';
 import 'profile_screen.dart';
+import 'history_screen.dart';
+import 'pinjaman_screen.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(
@@ -58,9 +60,9 @@ class _MainScreenWrapperState extends State<MainScreenWrapper> {
   // Screen options
   final List<Widget> _screens = [
     const SimpananScreen(),
-    const Center(child: Text('Pinjaman')),
+    const PinjamanScreen(),
     const HomePage(),
-    const Center(child: Text('History')),
+    const HistoryScreen(),
     const ProfileScreen(),
   ];
 
@@ -119,7 +121,7 @@ class KoperasiBottomNavBar extends StatelessWidget {
           onTap: onTap,
           backgroundColor: const Color(0xFFFFDC16),
           type: BottomNavigationBarType.fixed,
-          selectedItemColor: const Color(0xFF4E342E),
+          selectedItemColor: const Color.fromARGB(255, 255, 255, 255),
           unselectedItemColor: Colors.black87.withOpacity(0.7),
           selectedFontSize: 15,
           unselectedFontSize: 12,

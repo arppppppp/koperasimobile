@@ -55,10 +55,6 @@ class NotificationScreen extends StatelessWidget {
                 children: [
                   // Ganti GestureDetector dan Container lama dengan ini:
                   Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.3),
-                      shape: BoxShape.circle,
-                    ),
                     child: IconButton(
                       icon: const Icon(Icons.arrow_back, color: Color(0xFF4E342E)),
                       onPressed: () {
