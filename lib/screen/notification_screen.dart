@@ -53,23 +53,21 @@ class NotificationScreen extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (context) => const KoperasiApp()),
-                      );
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.3),
-                        shape: BoxShape.circle,
-                      ),
-                      child: const Icon(
-                        Icons.arrow_back,
-                        color: Color(0xFF4E342E),
-                      ),
+                  // Ganti GestureDetector dan Container lama dengan ini:
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.3),
+                      shape: BoxShape.circle,
+                    ),
+                    child: IconButton(
+                      icon: const Icon(Icons.arrow_back, color: Color(0xFF4E342E)),
+                      onPressed: () {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (context) => const KoperasiApp()),
+                        );
+                      },
+                      splashRadius: 24,
                     ),
                   ),
                   const SizedBox(width: 12),
@@ -169,16 +167,20 @@ class NotificationCard extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: const Color(0xFFFFF8E1), // latar kuning pucat, lebih jelas dari putih
         borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 5,
-            offset: const Offset(0, 2),
-          ),
-        ],
+    border: Border.all(
+      color: const Color(0xFFFFECB3), // border lembut
+      width: 1,
+    ),
+    boxShadow: [
+      BoxShadow(
+        color: Colors.black.withOpacity(0.08), // bayangan sedikit lebih gelap
+        blurRadius: 6,
+        offset: const Offset(0, 3),
       ),
+    ],
+  ),
       child: InkWell(
         onTap: () {},
         borderRadius: BorderRadius.circular(12),
