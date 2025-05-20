@@ -323,9 +323,17 @@ class _ProfileScreenState extends State<ProfileScreen> with SingleTickerProvider
       child: Container(
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
-        ),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 12,
+            spreadRadius: 2,
+            offset: Offset(0, 6),
+          ),
+        ],
+      ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -499,9 +507,17 @@ class _ProfileScreenState extends State<ProfileScreen> with SingleTickerProvider
       child: Container(
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
-        ),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 12,
+            spreadRadius: 2,
+            offset: Offset(0, 6),
+          ),
+        ],
+      ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -510,9 +526,17 @@ class _ProfileScreenState extends State<ProfileScreen> with SingleTickerProvider
                 Container(
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFFFDC16).withOpacity(0.2),
-                    shape: BoxShape.circle,
-                  ),
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      blurRadius: 12,
+                      spreadRadius: 2,
+                      offset: Offset(0, 6),
+                    ),
+                  ],
+                ),
                   child: const Icon(
                     Icons.settings_outlined,
                     color: Color(0xFFFFDC16),

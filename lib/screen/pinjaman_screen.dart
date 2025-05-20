@@ -243,31 +243,6 @@ class RegulerLoanContent extends StatelessWidget {
             interestRate: '0.8% per bulan',
           ),
           
-          // Apply for new loan button
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-            width: double.infinity,
-            child: ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFFFFDC16),
-                foregroundColor: const Color(0xFF4E342E),
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-              child: const Text(
-                'Ajukan Pinjaman Baru',
-                style: TextStyle(
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.w600,
-                  fontSize: 14,
-                ),
-              ),
-            ),
-          ),
-          
           // Extra space for bottom navigation bar
           const SizedBox(height: 24),
         ],
@@ -294,12 +269,12 @@ class UsahaLoanContent extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF43A047).withOpacity(0.2),
+                    color: const Color(0xFFFFDC16).withOpacity(0.2),
                     shape: BoxShape.circle,
                   ),
                   child: const Icon(
                     Icons.store,
-                    color: Color.fromARGB(255, 255, 255, 255),
+                    color: Color(0xFF4E342E),
                     size: 20,
                   ),
                 ),
@@ -336,19 +311,19 @@ class UsahaLoanContent extends StatelessWidget {
             margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: const Color(0xFFE8F5E9),
+              color: const Color(0xFFFFF9C4),
               borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: Colors.green.shade200),
+              border: Border.all(color: const Color(0xFFFFDC16).withOpacity(0.5)),
             ),
             child: const Row(
               children: [
-                Icon(Icons.info_outline, color: Color(0xFF2E7D32)),
+                Icon(Icons.info_outline, color: Color(0xFF4E342E)),
                 SizedBox(width: 12),
                 Expanded(
                   child: Text(
                     'Pinjaman khusus untuk pengembangan usaha dengan suku bunga 0.5% per bulan, tenor hingga 36 bulan',
                     style: TextStyle(
-                      color: Color(0xFF2E7D32),
+                      color: Color(0xFF4E342E),
                       fontSize: 12,
                       fontFamily: 'Poppins',
                     ),
@@ -381,31 +356,6 @@ class UsahaLoanContent extends StatelessWidget {
             interestRate: '0.5% per bulan',
           ),
           
-          // Apply for new loan button
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-            width: double.infinity,
-            child: ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF43A047),
-                foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-              child: const Text(
-                'Ajukan Pinjaman Usaha',
-                style: TextStyle(
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.w600,
-                  fontSize: 14,
-                ),
-              ),
-            ),
-          ),
-          
           // Extra space for bottom navigation bar
           const SizedBox(height: 24),
         ],
@@ -432,12 +382,12 @@ class BarangLoanContent extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF1E88E5).withOpacity(0.2),
+                    color: const Color(0xFFFFDC16).withOpacity(0.2),
                     shape: BoxShape.circle,
                   ),
                   child: const Icon(
                     Icons.shopping_cart,
-                    color: Color(0xFF1565C0),
+                    color: Color(0xFF4E342E),
                     size: 20,
                   ),
                 ),
@@ -474,19 +424,19 @@ class BarangLoanContent extends StatelessWidget {
             margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: const Color(0xFFE3F2FD),
+              color: const Color(0xFFFFF9C4),
               borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: Colors.blue.shade200),
+              border: Border.all(color: const Color(0xFFFFDC16).withOpacity(0.5)),
             ),
             child: const Row(
               children: [
-                Icon(Icons.info_outline, color: Color(0xFF1565C0)),
+                Icon(Icons.info_outline, color: Color(0xFF4E342E)),
                 SizedBox(width: 12),
                 Expanded(
                   child: Text(
                     'Cicilan pembelian barang elektronik, furnitur, dan kebutuhan lainnya dengan tenor hingga 12 bulan',
                     style: TextStyle(
-                      color: Color(0xFF1565C0),
+                      color: Color(0xFF4E342E),
                       fontSize: 12,
                       fontFamily: 'Poppins',
                     ),
@@ -519,69 +469,6 @@ class BarangLoanContent extends StatelessWidget {
             loanType: 'Barang',
             interestRate: '1% per bulan',
             itemName: 'Laptop Acer Aspire 3',
-          ),
-          
-          // Available items section
-          const SectionDivider(title: 'Barang Tersedia'),
-          
-          // Available items grid
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: GridView.count(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              crossAxisCount: 2,
-              childAspectRatio: 0.8,
-              crossAxisSpacing: 12,
-              mainAxisSpacing: 12,
-              children: const [
-                AvailableItemCard(
-                  name: 'Laptop',
-                  price: 'Rp 6.000.000',
-                  imageIcon: Icons.laptop_mac,
-                ),
-                AvailableItemCard(
-                  name: 'Smartphone',
-                  price: 'Rp 3.500.000',
-                  imageIcon: Icons.smartphone,
-                ),
-                AvailableItemCard(
-                  name: 'Kulkas',
-                  price: 'Rp 2.500.000',
-                  imageIcon: Icons.kitchen,
-                ),
-                AvailableItemCard(
-                  name: 'AC',
-                  price: 'Rp 4.000.000',
-                  imageIcon: Icons.ac_unit,
-                ),
-              ],
-            ),
-          ),
-          
-          // Apply for new loan button
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-            width: double.infinity,
-            child: ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF1E88E5),
-                foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-              child: const Text(
-                'Ajukan Kredit Barang',
-                style: TextStyle(
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.w600,
-                  fontSize: 14,
-                ),
-              ),
-            ),
           ),
           
           // Extra space for bottom navigation bar
@@ -625,15 +512,15 @@ class AvailableItemCard extends StatelessWidget {
           Container(
             height: 100,
             decoration: BoxDecoration(
-              color: const Color(0xFFE3F2FD),
+              color: const Color(0xFFFFF9C4),
               borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
-              border: Border.all(color: Colors.blue.shade100),
+              border: Border.all(color: const Color(0xFFFFDC16).withOpacity(0.5)),
             ),
             child: Center(
               child: Icon(
                 imageIcon,
                 size: 48,
-                color: const Color(0xFF1565C0),
+                color: const Color(0xFF4E342E),
               ),
             ),
           ),
@@ -658,7 +545,7 @@ class AvailableItemCard extends StatelessWidget {
                 Text(
                   price,
                   style: const TextStyle(
-                    color: Color(0xFF1565C0),
+                    color: Color(0xFF4E342E),
                     fontSize: 12,
                     fontFamily: 'Poppins',
                     fontWeight: FontWeight.w700,
@@ -671,8 +558,8 @@ class AvailableItemCard extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF1E88E5),
-                      foregroundColor: Colors.white,
+                      backgroundColor: const Color(0xFFFFDC16),
+                      foregroundColor: const Color(0xFF4E342E),
                       padding: const EdgeInsets.symmetric(vertical: 8),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
@@ -883,7 +770,7 @@ class UserLoanSummaryCard extends StatelessWidget {
                             width: 8,
                             height: 8,
                             decoration: const BoxDecoration(
-                              color: Color(0xFF43A047),
+                              color: Color(0xFFFFDC16),
                               shape: BoxShape.circle,
                             ),
                           ),
@@ -918,7 +805,7 @@ class UserLoanSummaryCard extends StatelessWidget {
                             width: 8,
                             height: 8,
                             decoration: const BoxDecoration(
-                              color: Color(0xFF1E88E5),
+                              color: Color(0xFFFFDC16),
                               shape: BoxShape.circle,
                             ),
                           ),
@@ -970,13 +857,13 @@ class UserLoanSummaryCard extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFFFF0F0),
-                    borderRadius: BorderRadius.circular(12),
+                    color: const Color(0xFFFFDC16),
+                    borderRadius: BorderRadius.circular(6),
                   ),
                   child: const Text(
                     'Rp. 8.000.000',
                     style: TextStyle(
-                      color: Color(0xFFE53935),
+                      color: Color(0xFF4E342E),
                       fontSize: 14,
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.w700,
@@ -995,23 +882,34 @@ class UserLoanSummaryCard extends StatelessWidget {
 class SectionDivider extends StatelessWidget {
   final String title;
   
-  const SectionDivider({super.key, required this.title});
+  const SectionDivider({
+    super.key,
+    required this.title,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      margin: const EdgeInsets.symmetric(vertical: 16),
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      color: const Color(0xFFEEEEEE),
-      child: Text(
-        title,
-        style: const TextStyle(
-          color: Color(0xFF4E342E),
-          fontSize: 16,
-          fontFamily: 'Poppins',
-          fontWeight: FontWeight.w700,
-        ),
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 20, 16, 12),
+      child: Row(
+        children: [
+          Text(
+            title,
+            style: const TextStyle(
+              color: Color(0xFF4E342E),
+              fontSize: 16,
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Container(
+              height: 1,
+              color: Colors.grey.shade300,
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -1024,11 +922,11 @@ class LoanHistoryItem extends StatelessWidget {
   final int remainingMonths;
   final bool isCompleted;
   final String loanType;
-  final String? itemName;  // Optional for barang loans
-
+  final String? itemName;
+  
   const LoanHistoryItem({
-    super.key, 
-    required this.remainingAmount, 
+    super.key,
+    required this.remainingAmount,
     required this.paymentAmount,
     required this.paymentDate,
     required this.remainingMonths,
@@ -1039,30 +937,6 @@ class LoanHistoryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Set color based on loan type
-    Color statusColor;
-    Color circleColor;
-    IconData typeIcon;
-    
-    switch (loanType) {
-      case 'Usaha':
-        statusColor = isCompleted ? const Color(0xFF4CAF50) : const Color.fromARGB(255, 255, 1, 1);
-        circleColor = const Color.fromARGB(255, 255, 1, 1);
-        typeIcon = Icons.store;
-        break;
-      case 'Barang':
-        statusColor = isCompleted ? const Color(0xFF4CAF50) : const Color.fromARGB(255, 255, 1, 1);
-        circleColor = const Color.fromARGB(255, 255, 1, 1);
-        typeIcon = Icons.shopping_cart;
-        break;
-      case 'Reguler':
-      default:
-        statusColor = isCompleted ? const Color(0xFF4CAF50) : const Color.fromARGB(255, 255, 1, 1);
-        circleColor = const Color.fromARGB(255, 255, 1, 1);
-        typeIcon = Icons.account_balance;
-        break;
-    }
-
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16),
       decoration: BoxDecoration(
@@ -1076,233 +950,284 @@ class LoanHistoryItem extends StatelessWidget {
           ),
         ],
       ),
-      child: Stack(
+      child: Column(
         children: [
-          // Status indicator
-          Positioned(
-            top: 12,
-            right: 12,
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-              decoration: BoxDecoration(
-                color: isCompleted 
-                  ? const Color(0xFFE8F5E9) 
-                  : const Color(0xFFFFF0F0),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Text(
-                isCompleted ? 'Lunas' : 'Belum',
-                style: TextStyle(
-                  color: isCompleted 
-                    ? const Color(0xFF4CAF50) 
-                    : statusColor,
-                  fontSize: 12,
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.w600,
+          // Header section
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            decoration: BoxDecoration(
+              color: isCompleted ? Colors.green.shade50 : const Color(0xFFFFF9C4),
+              borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+              border: Border(
+                bottom: BorderSide(
+                  color: isCompleted ? Colors.green.shade200 : const Color(0xFFFFDC16).withOpacity(0.5),
                 ),
               ),
             ),
-          ),
-          
-          // Loan type indicator
-          Positioned(
-            top: 40,
-            right: 12,
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-              decoration: BoxDecoration(
-                color: loanType == 'Reguler' 
-                  ? const Color(0xFFFFF9C4) 
-                  : loanType == 'Usaha' 
-                    ? const Color(0xFFE8F5E9) 
-                    : const Color(0xFFE3F2FD),
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(
-                  color: loanType == 'Reguler' 
-                    ? const Color(0xFFFFDC16) 
-                    : loanType == 'Usaha' 
-                      ? const Color(0xFF43A047) 
-                      : const Color(0xFF1E88E5),
-                  width: 1,
-                ),
-              ),
-              child: Row(
-                children: [
-                  Icon(
-                    typeIcon,
-                    size: 12,
-                    color: loanType == 'Reguler' 
-                      ? const Color(0xFF4E342E) 
-                      : loanType == 'Usaha' 
-                        ? const Color(0xFF2E7D32) 
-                        : const Color(0xFF1565C0),
+            child: Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: isCompleted ? Colors.green.withOpacity(0.2) : const Color(0xFFFFDC16).withOpacity(0.2),
+                    shape: BoxShape.circle,
                   ),
-                  const SizedBox(width: 4),
-                  Text(
-                    loanType,
+                  child: Icon(
+                    isCompleted ? Icons.check_circle : getIconForLoanType(loanType),
+                    color: isCompleted ? Colors.green : const Color(0xFF4E342E),
+                    size: 16,
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Pinjaman $loanType',
+                      style: const TextStyle(
+                        color: Color(0xFF4E342E),
+                        fontSize: 14,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    if (itemName != null)
+                      Text(
+                        itemName!,
+                        style: const TextStyle(
+                          color: Color(0xFF4E342E),
+                          fontSize: 12,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                  ],
+                ),
+                const Spacer(),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                  decoration: BoxDecoration(
+                    color: isCompleted ? Colors.green.withOpacity(0.1) : Colors.orange.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(4),
+                    border: Border.all(
+                      color: isCompleted ? Colors.green : Color(0xFFEF5350),
+                      width: 1,
+                    ),
+                  ),
+                  
+                  child: Text(
+                    isCompleted ? 'Selesai' : 'Belum Lunas',
                     style: TextStyle(
-                      color: loanType == 'Reguler' 
-                        ? const Color(0xFF4E342E) 
-                        : loanType == 'Usaha' 
-                          ? const Color(0xFF2E7D32) 
-                          : const Color(0xFF1565C0),
-                      fontSize: 10,
+                      color: isCompleted ? Colors.green :  Color(0xFFEF5350),
+                      fontSize: 12,
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
           
-          // Main content
+          // Loan details
           Padding(
             padding: const EdgeInsets.all(16),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
+            child: Column(
               children: [
-                // Months indicator
-                Container(
-                  width: 60,
-                  height: 60,
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFEFEFEF),
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                      color: isCompleted
-                        ? const Color(0xFF4CAF50)
-                        : circleColor,
-                      width: 2,
+                // Remaining amount row
+                Row(
+                  children: [
+                    const Text(
+                      'Sisa Pinjaman',
+                      style: TextStyle(
+                        color: Color(0xFF3E2723),
+                        fontSize: 14,
+                        fontFamily: 'Poppins',
+                      ),
                     ),
-                  ),
-                  child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          remainingMonths.toString(),
-                          style: const TextStyle(
-                            color: Color(0xFF1A1A1A),
-                            fontSize: 18,
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                        const Text(
-                          'Bulan',
-                          style: TextStyle(
-                            color: Color(0xFF1A1A1A),
-                            fontSize: 12,
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                      ],
+                    const Spacer(),
+                    Text(
+                      'Rp. $remainingAmount',
+                      style: const TextStyle(
+                        color: Color(0xFF3E2723),
+                        fontSize: 14,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
-                  ),
+                  ],
                 ),
                 
-                const SizedBox(width: 16),
+                const SizedBox(height: 8),
                 
-                // Payment details
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                // Payment amount row
+                Row(
+                  children: [
+                    const Text(
+                      'Cicilan per Bulan',
+                      style: TextStyle(
+                        color: Color(0xFF3E2723),
+                        fontSize: 14,
+                        fontFamily: 'Poppins',
+                      ),
+                    ),
+                    const Spacer(),
+                    Text(
+                      'Rp. $paymentAmount',
+                      style: const TextStyle(
+                        color: Color(0xFF3E2723),
+                        fontSize: 14,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+                
+                const SizedBox(height: 8),
+                
+                // Last payment date row
+                Row(
+                  children: [
+                    const Text(
+                      'Tanggal Pembayaran',
+                      style: TextStyle(
+                        color: Color(0xFF3E2723),
+                        fontSize: 14,
+                        fontFamily: 'Poppins',
+                      ),
+                    ),
+                    const Spacer(),
+                    Text(
+                      paymentDate,
+                      style: const TextStyle(
+                        color: Color(0xFF3E2723),
+                        fontSize: 14,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+                
+                const SizedBox(height: 8),
+                
+                // Remaining months row
+                Row(
+                  children: [
+                    const Text(
+                      'Sisa Tenor',
+                      style: TextStyle(
+                        color: Color(0xFF3E2723),
+                        fontSize: 14,
+                        fontFamily: 'Poppins',
+                      ),
+                    ),
+                    const Spacer(),
+                    Text(
+                      '$remainingMonths Bulan',
+                      style: const TextStyle(
+                        color: Color(0xFF3E2723),
+                        fontSize: 14,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+                
+                if (!isCompleted) ...[
+                  const SizedBox(height: 16),
+                  
+                  // Progress bar
+                  Column(
                     children: [
-                      if (itemName != null) ...[
-                        Row(
-                          children: [
-                            const Icon(
-                              Icons.shopping_basket,
-                              size: 16,
-                              color: Color(0xFF1565C0),
-                            ),
-                            const SizedBox(width: 4),
-                            Expanded(
-                              child: Text(
-                                itemName!,
-                                style: const TextStyle(
-                                  color: Color(0xFF1565C0),
-                                  fontSize: 14,
-                                  fontFamily: 'Poppins',
-                                  fontWeight: FontWeight.w500,
-                                ),
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                          ],
+                      LinearProgressIndicator(
+                        value: 1 - (remainingMonths / 12), // Assuming 12 months total tenor
+                        backgroundColor: Colors.grey.shade200,
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                          const Color(0xFFFFDC16),
                         ),
-                        const SizedBox(height: 4),
-                      ],
-                      Row(
-                        children: [
-                          const Icon(
-                            Icons.account_balance_wallet,
-                            size: 16,
-                            color: Color(0xFF3E2723),
-                          ),
-                          const SizedBox(width: 4),
-                          Text(
-                            'Sisa: Rp. $remainingAmount',
-                            style: const TextStyle(
-                              color: Color(0xFF3E2723),
-                              fontSize: 14,
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ],
+                        minHeight: 8,
+                        borderRadius: BorderRadius.circular(4),
                       ),
                       const SizedBox(height: 4),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Icon(
-                            Icons.payment,
-                            size: 16,
-                            color: Color(0xFF3E2723),
-                          ),
-                          const SizedBox(width: 4),
                           Text(
-                            'Bayar: Rp. $paymentAmount',
-                            style: const TextStyle(
-                              color: Color(0xFF3E2723),
-                              fontSize: 14,
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 4),
-                      Row(
-                        children: [
-                          const Icon(
-                            Icons.calendar_today,
-                            size: 16,
-                            color: Color(0xFF3E2723),
-                          ),
-                          const SizedBox(width: 4),
-                          Text(
-                            paymentDate,
+                            'Progres: ${(100 - (remainingMonths / 12 * 100)).round()}%',
                             style: const TextStyle(
                               color: Color(0xFF3E2723),
                               fontSize: 12,
                               fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w300,
+                            ),
+                          ),
+                          const Text(
+                            '100%',
+                            style: TextStyle(
+                              color: Color(0xFF3E2723),
+                              fontSize: 12,
+                              fontFamily: 'Poppins',
                             ),
                           ),
                         ],
                       ),
                     ],
                   ),
+                ],
+              ],
+            ),
+          ),
+          
+          // Buttons row
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+            child: Row(
+              children: [
+                Expanded(
+                  child: OutlinedButton(
+                    onPressed: () {},
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: const Color(0xFF4E342E),
+                      side: const BorderSide(color: Color(0xFFFFDC16)),
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    child: const Text(
+                      'Detail',
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w600,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ),
                 ),
+                if (!isCompleted) ...[
+                  const SizedBox(width: 12),
+                ],
               ],
             ),
           ),
         ],
       ),
     );
+  }
+  
+  IconData getIconForLoanType(String type) {
+    switch (type) {
+      case 'Reguler':
+        return Icons.account_balance;
+      case 'Usaha':
+        return Icons.store;
+      case 'Barang':
+        return Icons.shopping_cart;
+      default:
+        return Icons.monetization_on;
+    }
   }
 }
 
@@ -1311,11 +1236,11 @@ class TotalLoanSummaryCard extends StatelessWidget {
   final String duration;
   final String loanType;
   final String interestRate;
-  final String? itemName;  // Optional for barang loans
-
+  final String? itemName;
+  
   const TotalLoanSummaryCard({
-    super.key, 
-    required this.totalAmount, 
+    super.key,
+    required this.totalAmount,
     required this.duration,
     required this.loanType,
     required this.interestRate,
@@ -1324,154 +1249,126 @@ class TotalLoanSummaryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Set color based on loan type
-    Color backgroundColor;
-    Color iconColor;
-    Color borderColor;
-    IconData typeIcon;
-    
-    switch (loanType) {
-      case 'Usaha':
-        backgroundColor = const Color(0xFFE8F5E9);
-        iconColor = const Color(0xFF2E7D32);
-        borderColor = const Color(0xFF43A047).withOpacity(0.3);
-        typeIcon = Icons.store;
-        break;
-      case 'Barang':
-        backgroundColor = const Color(0xFFE3F2FD);
-        iconColor = const Color(0xFF1565C0);
-        borderColor = const Color(0xFF1E88E5).withOpacity(0.3);
-        typeIcon = Icons.shopping_cart;
-        break;
-      case 'Reguler':
-      default:
-        backgroundColor = const Color(0xFFFAF3E0);
-        iconColor = const Color(0xFF4E342E);
-        borderColor = const Color(0xFFFFDC16).withOpacity(0.3);
-        typeIcon = Icons.account_balance;
-        break;
-    }
-
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: backgroundColor,
+        color: const Color(0xFFFFECB3),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: borderColor),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 4,
-            offset: const Offset(0, 2),
-          ),
-        ],
+        border: Border.all(color: const Color(0xFFFFDC16)),
       ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Loan icon
-          Container(
-            width: 60,
-            height: 60,
-            decoration: BoxDecoration(
-              color: loanType == 'Reguler' 
-                ? const Color(0xFFFFDC16).withOpacity(0.2)
-                : loanType == 'Usaha'
-                  ? const Color(0xFF43A047).withOpacity(0.2)
-                  : const Color(0xFF1E88E5).withOpacity(0.2),
-              shape: BoxShape.circle,
-            ),
-            child: Center(
-              child: Icon(
-                typeIcon,
-                size: 30,
-                color: iconColor,
+          Row(
+            children: [
+              const Icon(
+                Icons.info_outline,
+                color: Color(0xFF4E342E),
+                size: 18,
+              ),
+              const SizedBox(width: 8),
+              Text(
+                'Info Pinjaman $loanType',
+                style: const TextStyle(
+                  color: Color(0xFF4E342E),
+                  fontSize: 16,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ],
+          ),
+          
+          if (itemName != null) ...[
+            const SizedBox(height: 8),
+            Text(
+              itemName!,
+              style: const TextStyle(
+                color: Color(0xFF4E342E),
+                fontSize: 14,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w600,
               ),
             ),
+          ],
+          
+          const SizedBox(height: 12),
+          
+          // Total amount row
+          Row(
+            children: [
+              const Text(
+                'Total Pinjaman',
+                style: TextStyle(
+                  color: Color(0xFF3E2723),
+                  fontSize: 14,
+                  fontFamily: 'Poppins',
+                ),
+              ),
+              const Spacer(),
+              Text(
+                'Rp. $totalAmount',
+                style: const TextStyle(
+                  color: Color(0xFF3E2723),
+                  fontSize: 14,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
           ),
           
-          const SizedBox(width: 16),
+          const SizedBox(height: 8),
           
-          // Loan summary
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Total Pinjaman $loanType',
-                  style: const TextStyle(
-                    color: Color(0xFF1A1A1A),
-                    fontSize: 16,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w700,
-                  ),
+          // Duration row
+          Row(
+            children: [
+              const Text(
+                'Tenor',
+                style: TextStyle(
+                  color: Color(0xFF3E2723),
+                  fontSize: 14,
+                  fontFamily: 'Poppins',
                 ),
-                if (itemName != null) ...[
-                  const SizedBox(height: 2),
-                  Text(
-                    itemName!,
-                    style: const TextStyle(
-                      color: Color(0xFF1565C0),
-                      fontSize: 12,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w600,
-                    ),
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ],
-                const SizedBox(height: 4),
-                Text(
-                  'Rp. $totalAmount',
-                  style: const TextStyle(
-                    color: Color(0xFF1A1A1A),
-                    fontSize: 18,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w700,
-                  ),
+              ),
+              const Spacer(),
+              Text(
+                duration,
+                style: const TextStyle(
+                  color: Color(0xFF3E2723),
+                  fontSize: 14,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w600,
                 ),
-                const SizedBox(height: 4),
-                Row(
-                  children: [
-                    const Icon(
-                      Icons.access_time,
-                      size: 16,
-                      color: Color(0xFF3E2723),
-                    ),
-                    const SizedBox(width: 4),
-                    Text(
-                      'Waktu: $duration',
-                      style: const TextStyle(
-                        color: Color(0xFF3E2723),
-                        fontSize: 12,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ],
+              ),
+            ],
+          ),
+          
+          const SizedBox(height: 8),
+          
+          // Interest rate row
+          Row(
+            children: [
+              const Text(
+                'Bunga',
+                style: TextStyle(
+                  color: Color(0xFF3E2723),
+                  fontSize: 14,
+                  fontFamily: 'Poppins',
                 ),
-                const SizedBox(height: 2),
-                Row(
-                  children: [
-                    const Icon(
-                      Icons.percent,
-                      size: 16,
-                      color: Color(0xFF3E2723),
-                    ),
-                    const SizedBox(width: 4),
-                    Text(
-                      'Bunga: $interestRate',
-                      style: const TextStyle(
-                        color: Color(0xFF3E2723),
-                        fontSize: 12,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ],
+              ),
+              const Spacer(),
+              Text(
+                interestRate,
+                style: const TextStyle(
+                  color: Color(0xFF3E2723),
+                  fontSize: 14,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w600,
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ],
       ),

@@ -380,8 +380,8 @@ class HomePage extends StatelessWidget {
           child: Row(
             children: [
               _buildSavingsCard('Simpanan Pokok', 'Rp. 500.000', const Color(0xFFFFD600), cardWidth),
-              _buildSavingsCard('Simpanan Wajib', 'Rp. 200.000', Colors.white, cardWidth),
-              _buildSavingsCard('Simpanan Sukarela', 'Rp. 200.000', Colors.white, cardWidth),
+              _buildSavingsCard('Simpanan Wajib', 'Rp. 200.000', const Color(0xFFFFD600), cardWidth),
+              _buildSavingsCard('Simpanan Sukarela', 'Rp. 200.000', const Color(0xFFFFD600), cardWidth),
             ],
           ),
         );
@@ -541,45 +541,212 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  // Improved history card with better styling
+    // Improved history card with better styling and more detailed history items
   Widget _buildHistoryCard() {
+    // More detailed transaction history with transaction types and icons
+    final List<Map<String, dynamic>> historyItems = [
+      {
+        'title': 'Pembayaran Pinjaman',
+        'amount': 'Rp. 500.000',
+        'date': '10 Mei 2025',
+        'type': 'outgoing',
+        'icon': Icons.payments_outlined,
+        'category': 'pinjaman',
+      },
+      {
+        'title': 'Setoran Simpanan Wajib',
+        'amount': 'Rp. 200.000',
+        'date': '5 Mei 2025',
+        'type': 'incoming',
+        'icon': Icons.savings_outlined,
+        'category': 'simpanan',
+      },
+      {
+        'title': 'Setoran Simpanan Sukarela',
+        'amount': 'Rp. 150.000',
+        'date': '1 Mei 2025',
+        'type': 'incoming',
+        'icon': Icons.account_balance_wallet_outlined,
+        'category': 'simpanan',
+      },
+      {
+        'title': 'Pencairan Pinjaman',
+        'amount': 'Rp. 5.000.000',
+        'date': '28 April 2025',
+        'type': 'incoming',
+        'icon': Icons.account_balance_outlined,
+        'category': 'pinjaman',
+      },
+      {
+        'title': 'Pembayaran Pinjaman',
+        'amount': 'Rp. 500.000',
+        'date': '10 April 2025',
+        'type': 'outgoing',
+        'icon': Icons.payments_outlined,
+        'category': 'pinjaman',
+      },
+    ];
+
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       elevation: 2,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(10),
       ),
       child: Container(
         padding: const EdgeInsets.all(16),
-        height: 140,
         decoration: BoxDecoration(
-          color: const Color(0xFFF5F5F5),
-          borderRadius: BorderRadius.circular(8),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
         ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              width: 60,
-              height: 60,
-              decoration: BoxDecoration(
-                color: Colors.grey.withOpacity(0.2),
-                shape: BoxShape.circle,
-              ),
-              child: const Icon(Icons.history, size: 32, color: Colors.black54),
+            // Header section with title and view all button
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFFFDC16).withOpacity(0.2),
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(Icons.history, size: 24, color: Color(0xFF4E342E)),
+                    ),
+                    const SizedBox(width: 12),
+                    const Text(
+                      'Riwayat Transaksi',
+                      style: TextStyle(
+                        color: Color(0xFF4E342E),
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+                TextButton(
+                  onPressed: () {
+                    // Navigate to detailed history screen
+                  },
+                  child: const Text(
+                    'Lihat Semua',
+                    style: TextStyle(
+                      color: Color(0xFFFFDC16),
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ],
             ),
-            const SizedBox(height: 12),
-            const Text(
-              'Riwayat Transaksi',
-              style: TextStyle(
-                color: Colors.black54,
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
+            const Divider(),
+            const SizedBox(height: 8),
+            
+            // Transaction list with improved styling
+            ...historyItems.map((item) => _buildHistoryItem(item)),
+            
+            // Show more button
+            const SizedBox(height: 8),
+            if (historyItems.length > 5)
+              Center(
+                child: TextButton.icon(
+                  onPressed: () {},
+                  icon: const Icon(Icons.expand_more, color: Color(0xFF4E342E)),
+                  label: const Text(
+                    'Tampilkan Lebih Banyak',
+                    style: TextStyle(color: Color(0xFF4E342E)),
+                  ),
+                ),
               ),
-            ),
           ],
         ),
       ),
     );
+  }
+
+  // Individual history item with better styling
+  Widget _buildHistoryItem(Map<String, dynamic> item) {
+    final bool isIncoming = item['type'] == 'incoming';
+    final Color amountColor = isIncoming ? Colors.green.shade700 : Colors.red.shade700;
+    final String amountPrefix = isIncoming ? '+ ' : '- ';
+    
+    return Container(
+      margin: const EdgeInsets.only(bottom: 12),
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+      decoration: BoxDecoration(
+        color: Colors.grey.shade50,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: Colors.grey.shade200),
+      ),
+      child: Row(
+        children: [
+          // Transaction icon
+          Container(
+            width: 40,
+            height: 40,
+            decoration: BoxDecoration(
+              color: _getCategoryColor(item['category']).withOpacity(0.15),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Icon(
+              item['icon'] as IconData,
+              color: _getCategoryColor(item['category']),
+              size: 20,
+            ),
+          ),
+          const SizedBox(width: 12),
+          
+          // Transaction details
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  item['title'] ?? '',
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: Color(0xFF4E342E),
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  item['date'] ?? '',
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.grey.shade600,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          
+          // Transaction amount
+          Text(
+            amountPrefix + (item['amount'] ?? ''),
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+              color: amountColor,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // Get category color based on transaction category
+  Color _getCategoryColor(String category) {
+    switch (category) {
+      case 'simpanan':
+        return Colors.blue.shade700;
+      case 'pinjaman':
+        return Colors.amber.shade700;
+      default:
+        return Colors.grey.shade700;
+    }
   }
 }

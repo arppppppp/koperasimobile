@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -8,6 +10,54 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  Future<void> _login() async {
+    final nip = _usernameController.text.trim();
+    final password = _passwordController.text;
+
+    if (nip.isEmpty || password.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('NIP dan password harus diisi.'),
+          backgroundColor: Color(0xFF5D4037),
+        ),
+      );
+      return;
+    }
+
+    try {
+      final response = await http.post(
+        Uri.parse('http://localhost:8000/api/login'), // ganti dengan URL backend kamu
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          'nip': nip,
+          'password': password,
+        }),
+      );
+
+      final data = jsonDecode(response.body);
+
+      if (response.statusCode == 200) {
+        // Simpan token jika ada, atau data pengguna
+        // Misalnya: data['token'], data['user'], dst.
+        Navigator.pushNamed(context, '/home');
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(data['message'] ?? 'Login gagal.'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Terjadi kesalahan: $e'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+  }
+
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool _obscurePassword = true;
@@ -348,21 +398,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             ],
                           ),
                           child: ElevatedButton(
-                            onPressed: () {
-                              if (_usernameController.text.isNotEmpty &&
-                                  _passwordController.text.isNotEmpty) {
-                                // Implement login logic
-                                Navigator.pushNamed(context, '/home');
-                              } else {
-                                // Show error or request to fill fields
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Text('Please fill all fields'),
-                                    backgroundColor: Color(0xFF5D4037),
-                                  ),
-                                );
-                              }
-                            },
+                            onPressed: _login,
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.transparent,
                               foregroundColor: const Color(0xFF4E342E),

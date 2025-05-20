@@ -215,7 +215,7 @@ class _SimpananScreenState extends State<SimpananScreen> with SingleTickerProvid
           _buildSimpananCard(
             'Simpanan Wajib',
             'Rp. 200.000',
-            const Color(0xFF4CAF50),
+            const Color(0xFFFFD600),
             'Total simpanan wajib yang telah dibayarkan',
           ),
           const SizedBox(height: 24),
@@ -248,7 +248,7 @@ class _SimpananScreenState extends State<SimpananScreen> with SingleTickerProvid
           _buildSimpananCard(
             'Simpanan Sukarela',
             'Rp. 200.000',
-            const Color(0xFF2196F3),
+            const Color(0xFFFFD600),
             'Total simpanan sukarela yang telah dibayarkan',
           ),
           const SizedBox(height: 16),

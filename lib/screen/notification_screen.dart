@@ -77,37 +77,10 @@ class NotificationScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              Row(
-                children: [
-                  _buildFilterChip('Semua', true),
-                  const SizedBox(width: 8),
-                  _buildFilterChip('Transaksi', false),
-                  const SizedBox(width: 8),
-                  _buildFilterChip('Info', false),
-                ],
-              ),
             ],
           ),
           const SizedBox(height: 8),
         ],
-      ),
-    );
-  }
-
-  Widget _buildFilterChip(String label, bool isSelected) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-      decoration: BoxDecoration(
-        color: isSelected ? const Color(0xFF4E342E) : Colors.white.withOpacity(0.3),
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Text(
-        label,
-        style: TextStyle(
-          color: isSelected ? Colors.white : const Color(0xFF4E342E),
-          fontSize: 12,
-          fontWeight: FontWeight.w500,
-        ),
       ),
     );
   }
