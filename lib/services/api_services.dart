@@ -54,4 +54,27 @@ class ApiService {
       return false;
     }
   }
+
+  // Login user
+  static Future<User?> loginUser(String nip, String password) async {
+    try {
+      final response = await http.post(
+        Uri.parse('$baseUrl/login.php'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          'nip': nip,
+          'password': password,
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        return User.fromJson(data['user']);
+      } else {
+        return null; // Invalid credentials
+      }
+    } catch (e) {
+      return null; // Error
+    }
+  }
 }

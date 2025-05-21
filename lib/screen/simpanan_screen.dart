@@ -196,10 +196,6 @@ class _SimpananScreenState extends State<SimpananScreen> with SingleTickerProvid
               height: 1.5,
             ),
           ),
-          const SizedBox(height: 24),
-          _buildSectionHeader('Riwayat Setoran'),
-          const SizedBox(height: 16),
-          _buildHistoryList(),
         ],
       ),
     );

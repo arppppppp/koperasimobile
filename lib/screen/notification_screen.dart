@@ -197,26 +197,6 @@ class NotificationCard extends StatelessWidget {
                     if (notification.hasAction) ...[
                       const SizedBox(height: 12),
                       Row(
-                        children: [
-                          TextButton(
-                            onPressed: () {},
-                            style: TextButton.styleFrom(
-                              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                              backgroundColor: const Color(0xFFFFDC16).withOpacity(0.2),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                            ),
-                            child: const Text(
-                              'Lihat Detail',
-                              style: TextStyle(
-                                color: Color(0xFF4E342E),
-                                fontSize: 11,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ),
-                        ],
                       ),
                     ],
                     if (!notification.isRead) ...[
