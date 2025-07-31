@@ -1,24 +1,54 @@
 import 'package:flutter/material.dart';
-import 'forgot_password_screen.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class ForgotPasswordScreen extends StatefulWidget {
+  const ForgotPasswordScreen({Key? key}) : super(key: key);
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<ForgotPasswordScreen> createState() => _ForgotPasswordScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
-  final TextEditingController _usernameController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  bool _obscurePassword = true;
-  bool _rememberMe = false;
+class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
+  final TextEditingController _emailController = TextEditingController();
+  bool _isLoading = false;
 
   @override
   void dispose() {
-    _usernameController.dispose();
-    _passwordController.dispose();
+    _emailController.dispose();
     super.dispose();
+  }
+
+  void _handleResetPassword() async {
+    if (_emailController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Please enter your email address'),
+          backgroundColor: Color(0xFF5D4037),
+        ),
+      );
+      return;
+    }
+
+    setState(() {
+      _isLoading = true;
+    });
+
+    // Simulate API call
+    await Future.delayed(const Duration(seconds: 2));
+
+    setState(() {
+      _isLoading = false;
+    });
+
+    // Show success message
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Reset password link has been sent to your email'),
+        backgroundColor: Color(0xFF4CAF50),
+      ),
+    );
+
+    // Navigate back to login
+    Navigator.of(context).pop();
   }
 
   @override
@@ -50,7 +80,35 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SizedBox(height: size.height * 0.06),
+                  SizedBox(height: size.height * 0.04),
+                  
+                  // Back Button
+                  Row(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.1),
+                              blurRadius: 10,
+                              offset: const Offset(0, 2),
+                            ),
+                          ],
+                        ),
+                        child: IconButton(
+                          onPressed: () => Navigator.of(context).pop(),
+                          icon: const Icon(
+                            Icons.arrow_back,
+                            color: Color(0xFF4E342E),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  
+                  SizedBox(height: size.height * 0.04),
                   
                   // Logo Container with shadow
                   Container(
@@ -82,7 +140,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         // Replace with your logo
                         child: const Icon(
-                          Icons.account_balance,
+                          Icons.lock_reset,
                           size: 50,
                           color: Color(0xFF4E342E),
                         ),
@@ -92,7 +150,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   
                   const SizedBox(height: 24),
                   
-                  // App Name with text shadow effect
+                  // Title with text shadow effect
                   ShaderMask(
                     blendMode: BlendMode.srcIn,
                     shaderCallback: (bounds) => const LinearGradient(
@@ -101,32 +159,21 @@ class _LoginScreenState extends State<LoginScreen> {
                       end: Alignment.bottomRight,
                     ).createShader(bounds),
                     child: const Text(
-                      'KOPERASI',
+                      'FORGOT PASSWORD',
                       style: TextStyle(
                         fontFamily: 'Poppins',
-                        fontSize: 28,
+                        fontSize: 24,
                         fontWeight: FontWeight.bold,
-                        letterSpacing: 2,
+                        letterSpacing: 1.5,
                       ),
                     ),
                   ),
                   
                   const SizedBox(height: 10),
                   
-                  // Tagline
-                  Text(
-                    'Membangun Ekonomi Bersama',
-                    style: TextStyle(
-                      color: const Color(0xFF5D4037).withOpacity(0.8),
-                      fontFamily: 'Poppins',
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  
                   SizedBox(height: size.height * 0.06),
                   
-                  // Login Form Card
+                  // Reset Password Form Card
                   Container(
                     padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
@@ -144,11 +191,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Login Text
+                        // Reset Password Text
                         const Padding(
                           padding: EdgeInsets.only(left: 4, bottom: 16),
                           child: Text(
-                            'Login',
+                            'Reset Password',
                             style: TextStyle(
                               fontFamily: 'Poppins',
                               fontSize: 18,
@@ -158,11 +205,26 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                         
-                        // Username Field Label
+                        // Description
+                        Padding(
+                          padding: const EdgeInsets.only(left: 4, bottom: 24),
+                          child: Text(
+                            'Please enter your email address. You will receive a link to create a new password via email.',
+                            style: TextStyle(
+                              color: const Color(0xFF5D4037).withOpacity(0.7),
+                              fontFamily: 'Poppins',
+                              fontSize: 13,
+                              fontWeight: FontWeight.w400,
+                              height: 1.4,
+                            ),
+                          ),
+                        ),
+                        
+                        // Email Field Label
                         Padding(
                           padding: const EdgeInsets.only(left: 4, bottom: 8),
                           child: Text(
-                            'Username',
+                            'Email Address',
                             style: TextStyle(
                               color: const Color(0xFF5D4037).withOpacity(0.9),
                               fontFamily: 'Poppins',
@@ -172,7 +234,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                         
-                        // Username Field
+                        // Email Field
                         Container(
                           decoration: BoxDecoration(
                             color: const Color(0xFFF8F8F8),
@@ -183,9 +245,10 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                           child: TextField(
-                            controller: _usernameController,
+                            controller: _emailController,
+                            keyboardType: TextInputType.emailAddress,
                             decoration: const InputDecoration(
-                              hintText: 'Enter your username',
+                              hintText: 'Enter your email address',
                               hintStyle: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 14,
@@ -194,7 +257,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               prefixIcon: Padding(
                                 padding: EdgeInsets.all(12.0),
                                 child: Icon(
-                                  Icons.person_outline,
+                                  Icons.email_outlined,
                                   color: Color(0xFF6D4C41),
                                 ),
                               ),
@@ -203,109 +266,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                         
-                        const SizedBox(height: 20),
-                        
-                        // Password Field Label
-                        Padding(
-                          padding: const EdgeInsets.only(left: 4, bottom: 8),
-                          child: Text(
-                            'Password',
-                            style: TextStyle(
-                              color: const Color(0xFF5D4037).withOpacity(0.9),
-                              fontFamily: 'Poppins',
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ),
-                        
-                        // Password Field
-                        Container(
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFF8F8F8),
-                            borderRadius: BorderRadius.circular(15),
-                            border: Border.all(
-                              color: const Color(0xFFE0E0E0),
-                              width: 1,
-                            ),
-                          ),
-                          child: TextField(
-                            controller: _passwordController,
-                            obscureText: _obscurePassword,
-                            decoration: InputDecoration(
-                              hintText: 'Enter your password',
-                              hintStyle: const TextStyle(
-                                color: Colors.grey,
-                                fontSize: 14,
-                              ),
-                              border: InputBorder.none,
-                              prefixIcon: const Padding(
-                                padding: EdgeInsets.all(12.0),
-                                child: Icon(
-                                  Icons.lock_outline,
-                                  color: Color(0xFF6D4C41),
-                                ),
-                              ),
-                              suffixIcon: GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    _obscurePassword = !_obscurePassword;
-                                  });
-                                },
-                                child: Icon(
-                                  _obscurePassword
-                                      ? Icons.visibility_off
-                                      : Icons.visibility,
-                                  color: const Color(0xFF6D4C41),
-                                ),
-                              ),
-                              contentPadding: const EdgeInsets.symmetric(vertical: 16.0),
-                            ),
-                          ),
-                        ),
-                        
-                        const SizedBox(height: 16),
-                        
-                        // Remember Me Checkbox & Forgot Password
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            // Remember Me
-                            Row(
-                              children: [
-                                SizedBox(
-                                  width: 24,
-                                  height: 24,
-                                  child: Checkbox(
-                                    value: _rememberMe,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        _rememberMe = value!;
-                                      });
-                                    },
-                                    activeColor: const Color(0xFFFFDC16),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(4),
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(width: 8),
-                                Text(
-                                  'Remember Me',
-                                  style: TextStyle(
-                                    color: Colors.black.withOpacity(0.7),
-                                    fontFamily: 'Poppins',
-                                    fontSize: 12,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        
                         const SizedBox(height: 24),
                         
-                        // Login Button with gradient
+                        // Send Reset Link Button with gradient
                         Container(
                           width: double.infinity,
                           height: 55,
@@ -328,21 +291,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             ],
                           ),
                           child: ElevatedButton(
-                            onPressed: () {
-                              if (_usernameController.text.isNotEmpty &&
-                                  _passwordController.text.isNotEmpty) {
-                                // Implement login logic
-                                Navigator.pushNamed(context, '/home');
-                              } else {
-                                // Show error or request to fill fields
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Text('Please fill all fields'),
-                                    backgroundColor: Color(0xFF5D4037),
-                                  ),
-                                );
-                              }
-                            },
+                            onPressed: _isLoading ? null : _handleResetPassword,
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.transparent,
                               foregroundColor: const Color(0xFF4E342E),
@@ -351,15 +300,24 @@ class _LoginScreenState extends State<LoginScreen> {
                                 borderRadius: BorderRadius.circular(50),
                               ),
                             ),
-                            child: const Text(
-                              'LOGIN',
-                              style: TextStyle(
-                                fontFamily: 'Poppins',
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                                letterSpacing: 1,
-                              ),
-                            ),
+                            child: _isLoading
+                                ? const SizedBox(
+                                    width: 20,
+                                    height: 20,
+                                    child: CircularProgressIndicator(
+                                      color: Color(0xFF4E342E),
+                                      strokeWidth: 2,
+                                    ),
+                                  )
+                                : const Text(
+                                    'SEND RESET LINK',
+                                    style: TextStyle(
+                                      fontFamily: 'Poppins',
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                      letterSpacing: 1,
+                                    ),
+                                  ),
                           ),
                         ),
                       ],
@@ -368,38 +326,35 @@ class _LoginScreenState extends State<LoginScreen> {
                   
                   const SizedBox(height: 24),
                   
-                  // No Account Yet
+                  // Back to Login
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'No account yet? ',
+                        'Remember your password? ',
                         style: TextStyle(
                           color: Colors.black.withOpacity(0.7),
                           fontFamily: 'Poppins',
                           fontSize: 14,
                         ),
                       ),
-                      // Forgot Password Link
                       TextButton(
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => const ForgotPasswordScreen()),
-                          );
+                          Navigator.of(context).pop();
                         },
                         style: TextButton.styleFrom(
-                          foregroundColor: const Color(0xFF5D4037),
+                          foregroundColor: const Color(0xFF4E342E),
                           padding: EdgeInsets.zero,
                           minimumSize: const Size(0, 0),
                           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         ),
                         child: const Text(
-                          'Forgot Password?',
+                          'Back to Login',
                           style: TextStyle(
                             fontFamily: 'Poppins',
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xFF6D4C41),
                           ),
                         ),
                       ),
