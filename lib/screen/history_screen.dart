@@ -459,19 +459,4 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
       ),
     );
   }
-
-  String _getStatusText(String status) {
-    switch (status) {
-      case 'success':
-        return 'Berhasil';
-      case 'warning':
-        return 'Perlu Perhatian';
-      case 'error':
-        return 'Gagal';
-      case 'info':
-        return 'Informasi';
-      default:
-        return 'Tidak Diketahui';
-    }
-  }
 }
