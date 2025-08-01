@@ -18,14 +18,6 @@ class NotificationScreen extends StatelessWidget {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: const Color(0xFFFFDC16),
-        child: const Icon(
-          Icons.refresh,
-          color: Color(0xFF4E342E),
-        ),
-      ),
     );
   }
 

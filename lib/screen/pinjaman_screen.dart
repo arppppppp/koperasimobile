@@ -20,15 +20,6 @@ class PinjamanScreen extends StatelessWidget {
             fontFamily: 'Poppins',
           ),
         ),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Color(0xFF4E342E)),
-          onPressed: () {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const KoperasiApp()),
-            );
-          },
-        ),
       ),
       body: const PinjamanContent(),
     );
@@ -769,95 +760,9 @@ class RegulerLoanContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: const EdgeInsets.symmetric(vertical: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Section header
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Row(
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFFFDC16).withOpacity(0.2),
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Icon(
-                    Icons.account_balance,
-                    color: Color(0xFF4E342E),
-                    size: 20,
-                  ),
-                ),
-                const SizedBox(width: 12),
-                const Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Pinjaman Reguler',
-                      style: TextStyle(
-                        color: Color(0xFF4E342E),
-                        fontSize: 16,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                    Text(
-                      'Cicilan tetap, bunga rendah',
-                      style: TextStyle(
-                        color: Color(0xFF4E342E),
-                        fontSize: 12,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-
-          // Info card
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: const Color(0xFFF5F5F5),
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: Colors.grey.shade300),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Icon(Icons.info_outline, color: Color(0xFF4E342E)),
-                    SizedBox(width: 12),
-                    Expanded(
-                      child: Text(
-                        'Pinjaman reguler dengan suku bunga tetap 0.8% per bulan, tenor hingga 24 bulan',
-                        style: TextStyle(
-                          color: Color(0xFF4E342E),
-                          fontSize: 12,
-                          fontFamily: 'Poppins',
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 12),
-                const TotalLoanSummaryCard(
-                  totalAmount: '1.000.000',
-                  duration: '10 Bulan',
-                  loanType: 'Reguler',
-                  interestRate: '0.8% per bulan',
-                ),
-              ],
-            ),
-          ),
-          
           // Section divider
           const SectionDivider(title: 'Riwayat Pinjaman Reguler'),
           
@@ -881,11 +786,6 @@ class RegulerLoanContent extends StatelessWidget {
             isCompleted: true,
             loanType: 'Reguler',
           ),
-          
-          const SizedBox(height: 16),
-          
-          // Extra space for bottom navigation bar
-          const SizedBox(height: 24),
         ],
       ),
     );
@@ -898,82 +798,9 @@ class UsahaLoanContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: const EdgeInsets.symmetric(vertical: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Section header
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Row(
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFFFDC16).withOpacity(0.2),
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Icon(
-                    Icons.store,
-                    color: Color(0xFF4E342E),
-                    size: 20,
-                  ),
-                ),
-                const SizedBox(width: 12),
-                const Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Pinjaman Usaha',
-                      style: TextStyle(
-                        color: Color(0xFF4E342E),
-                        fontSize: 16,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                    Text(
-                      'Untuk pengembangan usaha anggota',
-                      style: TextStyle(
-                        color: Color(0xFF4E342E),
-                        fontSize: 12,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-
-          // Info card
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: const Color(0xFFFFF9C4),
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: const Color(0xFFFFDC16).withOpacity(0.5)),
-            ),
-            child: const Row(
-              children: [
-                Icon(Icons.info_outline, color: Color(0xFF4E342E)),
-                SizedBox(width: 12),
-                Expanded(
-                  child: Text(
-                    'Pinjaman khusus untuk pengembangan usaha dengan suku bunga 0.5% per bulan, tenor hingga 36 bulan',
-                    style: TextStyle(
-                      color: Color(0xFF4E342E),
-                      fontSize: 12,
-                      fontFamily: 'Poppins',
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          
           // Section divider
           const SectionDivider(title: 'Riwayat Pinjaman Usaha'),
           
@@ -986,19 +813,6 @@ class UsahaLoanContent extends StatelessWidget {
             isCompleted: false,
             loanType: 'Usaha',
           ),
-          
-          const SizedBox(height: 16),
-          
-          // Total loan summary card
-          const TotalLoanSummaryCard(
-            totalAmount: '5.000.000',
-            duration: '10 Bulan',
-            loanType: 'Usaha',
-            interestRate: '0.5% per bulan',
-          ),
-          
-          // Extra space for bottom navigation bar
-          const SizedBox(height: 24),
         ],
       ),
     );
@@ -1011,82 +825,9 @@ class BarangLoanContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: const EdgeInsets.symmetric(vertical: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Section header
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Row(
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFFFDC16).withOpacity(0.2),
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Icon(
-                    Icons.shopping_cart,
-                    color: Color(0xFF4E342E),
-                    size: 20,
-                  ),
-                ),
-                const SizedBox(width: 12),
-                const Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Pinjaman Barang',
-                      style: TextStyle(
-                        color: Color(0xFF4E342E),
-                        fontSize: 16,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                    Text(
-                      'Kredit barang kebutuhan',
-                      style: TextStyle(
-                        color: Color(0xFF4E342E),
-                        fontSize: 12,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-
-          // Info card
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: const Color(0xFFFFF9C4),
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: const Color(0xFFFFDC16).withOpacity(0.5)),
-            ),
-            child: const Row(
-              children: [
-                Icon(Icons.info_outline, color: Color(0xFF4E342E)),
-                SizedBox(width: 12),
-                Expanded(
-                  child: Text(
-                    'Cicilan pembelian barang elektronik, furnitur, dan kebutuhan lainnya dengan tenor hingga 12 bulan',
-                    style: TextStyle(
-                      color: Color(0xFF4E342E),
-                      fontSize: 12,
-                      fontFamily: 'Poppins',
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          
           // Section divider
           const SectionDivider(title: 'Riwayat Pinjaman Barang'),
           
@@ -1100,20 +841,6 @@ class BarangLoanContent extends StatelessWidget {
             loanType: 'Barang',
             itemName: 'Laptop Acer Aspire 3',
           ),
-          
-          const SizedBox(height: 16),
-          
-          // Total loan summary card
-          const TotalLoanSummaryCard(
-            totalAmount: '2.700.000',
-            duration: '9 Bulan',
-            loanType: 'Barang',
-            interestRate: '1% per bulan',
-            itemName: 'Laptop Acer Aspire 3',
-          ),
-          
-          // Extra space for bottom navigation bar
-          const SizedBox(height: 24),
         ],
       ),
     );

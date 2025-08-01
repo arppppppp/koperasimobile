@@ -39,15 +39,6 @@ class _SimpananScreenState extends State<SimpananScreen> with SingleTickerProvid
             fontWeight: FontWeight.w700,
           ),
         ),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Color(0xFF4E342E)),
-          onPressed: () {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const KoperasiApp()),
-            );
-          },
-        ),
       ),
       body: Column(
         children: [
@@ -186,16 +177,8 @@ class _SimpananScreenState extends State<SimpananScreen> with SingleTickerProvid
             'Total simpanan pokok yang telah dibayarkan',
           ),
           const SizedBox(height: 24),
-          _buildSectionHeader('Informasi Simpanan Pokok'),
+
           const SizedBox(height: 16),
-          const Text(
-            'Simpanan pokok merupakan sejumlah uang yang wajib dibayarkan oleh anggota kepada koperasi pada saat menjadi anggota. Simpanan pokok tidak dapat diambil kembali selama yang bersangkutan masih menjadi anggota koperasi.',
-            style: TextStyle(
-              color: Color(0xFF4E342E),
-              fontSize: 14,
-              height: 1.5,
-            ),
-          ),
         ],
       ),
     );
@@ -215,17 +198,7 @@ class _SimpananScreenState extends State<SimpananScreen> with SingleTickerProvid
             'Total simpanan wajib yang telah dibayarkan',
           ),
           const SizedBox(height: 24),
-          _buildSectionHeader('Informasi Simpanan Wajib'),
-          const SizedBox(height: 16),
-          const Text(
-            'Simpanan wajib adalah sejumlah simpanan tertentu yang dibayarkan oleh anggota kepada koperasi setiap bulan atau sesuai periode pembayaran yang ditentukan. Simpanan wajib tidak dapat diambil kembali selama yang bersangkutan masih menjadi anggota.',
-            style: TextStyle(
-              color: Color(0xFF4E342E),
-              fontSize: 14,
-              height: 1.5,
-            ),
-          ),
-          const SizedBox(height: 24),
+
           _buildSectionHeader('Riwayat Setoran'),
           const SizedBox(height: 16),
           _buildHistoryList(),
@@ -246,18 +219,6 @@ class _SimpananScreenState extends State<SimpananScreen> with SingleTickerProvid
             'Rp. 200.000',
             const Color(0xFFFFD600),
             'Total simpanan sukarela yang telah dibayarkan',
-          ),
-          const SizedBox(height: 16),
-          const SizedBox(height: 24),
-          _buildSectionHeader('Informasi Simpanan Sukarela'),
-          const SizedBox(height: 16),
-          const Text(
-            'Simpanan sukarela adalah simpanan yang besarnya tidak ditentukan, tetapi bergantung kepada kemampuan anggota. Simpanan sukarela dapat disetorkan dan diambil kapan saja sesuai ketentuan koperasi.',
-            style: TextStyle(
-              color: Color(0xFF4E342E),
-              fontSize: 14,
-              height: 1.5,
-            ),
           ),
           const SizedBox(height: 24),
           _buildSectionHeader('Riwayat Transaksi'),
