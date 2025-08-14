@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'homepage.dart';
 
 class HistoryScreen extends StatefulWidget {
   const HistoryScreen({super.key});
@@ -8,11 +7,16 @@ class HistoryScreen extends StatefulWidget {
   State<HistoryScreen> createState() => _HistoryScreenState();
 }
 
-class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProviderStateMixin {
+class _HistoryScreenState extends State<HistoryScreen>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  
-  // Filter options
-  final List<String> _filterOptions = ['Semua', '1 Minggu', '1 Bulan', '3 Bulan'];
+
+  final List<String> _filterOptions = [
+    'Semua',
+    '1 Minggu',
+    '1 Bulan',
+    '3 Bulan',
+  ];
   String _selectedFilter = 'Semua';
 
   @override
@@ -30,16 +34,24 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFFAFAFA),
+      appBar: AppBar(
+        backgroundColor: const Color(0xFFFFDC16),
+        toolbarHeight: 69,
+        elevation: 0,
+        title: const Text(
+          'Riwayat Transaksi',
+          style: TextStyle(
+            color: Color(0xFF4E342E),
+            fontSize: 18,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+      ),
       body: SafeArea(
         child: Column(
           children: [
-            // Header
-            _buildHeader(),
-            
-            // Filter & Search Section
             _buildFilterSection(),
-            
-            // Tab Bar
             Container(
               color: Colors.white,
               child: TabBar(
@@ -48,73 +60,17 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
                 unselectedLabelColor: Colors.grey,
                 indicatorColor: const Color(0xFFFFDC16),
                 indicatorWeight: 3,
-                tabs: const [
-                  Tab(text: 'Simpanan'),
-                  Tab(text: 'Pinjaman'),
-                ],
+                tabs: const [Tab(text: 'Simpanan'), Tab(text: 'Pinjaman')],
               ),
             ),
-            
-            // Tab Bar View
             Expanded(
               child: TabBarView(
                 controller: _tabController,
-                children: [
-                  // Simpanan History
-                  _buildSimpananHistory(),
-                  
-                  // Pinjaman History
-                  _buildPinjamanHistory(),
-                ],
+                children: [_buildSimpananHistory(), _buildPinjamanHistory()],
               ),
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildHeader() {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      color: const Color(0xFFFFDC16),
-      child: Row(
-        children: [
-          // Back Button
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const KoperasiApp()),
-              );
-            },
-            child: SizedBox(
-              width: 36,
-              height: 36,
-                    child: IconButton(
-                      icon: const Icon(Icons.arrow_back, color: Color(0xFF4E342E)),
-                      onPressed: () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(builder: (context) => const KoperasiApp()),
-                        );
-                      },
-                      splashRadius: 24,
-                    ),
-            ),
-          ),
-          const SizedBox(width: 16),
-          
-          // Title
-          const Text(
-            'Riwayat Transaksi',
-            style: TextStyle(
-              color: Color(0xFF4E342E),
-              fontSize: 18,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-        ],
       ),
     );
   }
@@ -125,7 +81,6 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
       color: Colors.white,
       child: Column(
         children: [
-          // Search Bar
           TextField(
             decoration: InputDecoration(
               hintText: 'Cari transaksi...',
@@ -144,39 +99,51 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
             ),
           ),
           const SizedBox(height: 12),
-          
-          // Filter Options
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
-              children: _filterOptions.map((filter) {
-                bool isSelected = _selectedFilter == filter;
-                return GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      _selectedFilter = filter;
-                    });
-                  },
-                  child: Container(
-                    margin: const EdgeInsets.only(right: 10),
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                    decoration: BoxDecoration(
-                      color: isSelected ? const Color(0xFFFFDC16) : Colors.white,
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(
-                        color: isSelected ? const Color(0xFFFFDC16) : Colors.grey.shade300,
+              children:
+                  _filterOptions.map((filter) {
+                    bool isSelected = _selectedFilter == filter;
+                    return GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          _selectedFilter = filter;
+                        });
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.only(right: 10),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 8,
+                        ),
+                        decoration: BoxDecoration(
+                          color:
+                              isSelected
+                                  ? const Color(0xFFFFDC16)
+                                  : Colors.white,
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(
+                            color:
+                                isSelected
+                                    ? const Color(0xFFFFDC16)
+                                    : Colors.grey.shade300,
+                          ),
+                        ),
+                        child: Text(
+                          filter,
+                          style: TextStyle(
+                            color:
+                                isSelected
+                                    ? const Color(0xFF4E342E)
+                                    : Colors.grey,
+                            fontWeight:
+                                isSelected ? FontWeight.w600 : FontWeight.w400,
+                          ),
+                        ),
                       ),
-                    ),
-                    child: Text(
-                      filter,
-                      style: TextStyle(
-                        color: isSelected ? const Color(0xFF4E342E) : Colors.grey,
-                        fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
-                      ),
-                    ),
-                  ),
-                );
-              }).toList(),
+                    );
+                  }).toList(),
             ),
           ),
         ],
@@ -185,7 +152,6 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
   }
 
   Widget _buildSimpananHistory() {
-    // Sample data for Simpanan transactions
     final List<Map<String, dynamic>> transactions = [
       {
         'date': '19 Mei 2025',
@@ -193,7 +159,7 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
         'type': 'Simpanan Pokok',
         'amount': '+ Rp 100.000',
         'status': 'success',
-        'description': 'Setoran rutin bulanan'
+        'description': 'Setoran rutin bulanan',
       },
       {
         'date': '15 Mei 2025',
@@ -201,7 +167,7 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
         'type': 'Simpanan Sukarela',
         'amount': '+ Rp 500.000',
         'status': 'success',
-        'description': 'Setoran tambahan'
+        'description': 'Setoran tambahan',
       },
       {
         'date': '10 Mei 2025',
@@ -209,7 +175,7 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
         'type': 'Simpanan Wajib',
         'amount': '+ Rp 200.000',
         'status': 'success',
-        'description': 'Setoran rutin bulanan'
+        'description': 'Setoran rutin bulanan',
       },
       {
         'date': '05 Mei 2025',
@@ -217,7 +183,7 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
         'type': 'Simpanan Sukarela',
         'amount': '- Rp 300.000',
         'status': 'warning',
-        'description': 'Penarikan dana'
+        'description': 'Penarikan dana',
       },
       {
         'date': '28 Apr 2025',
@@ -225,31 +191,14 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
         'type': 'Simpanan Wajib',
         'amount': '+ Rp 200.000',
         'status': 'success',
-        'description': 'Setoran rutin bulanan'
+        'description': 'Setoran rutin bulanan',
       },
     ];
 
-    return transactions.isEmpty
-        ? _buildEmptyState('Tidak ada riwayat simpanan')
-        : ListView.builder(
-            padding: const EdgeInsets.all(0),
-            itemCount: transactions.length,
-            itemBuilder: (context, index) {
-              final transaction = transactions[index];
-              return _buildTransactionCard(
-                date: transaction['date'],
-                time: transaction['time'],
-                type: transaction['type'],
-                amount: transaction['amount'],
-                status: transaction['status'],
-                description: transaction['description'],
-              );
-            },
-          );
+    return _buildTransactionList(transactions, 'Tidak ada riwayat simpanan');
   }
 
   Widget _buildPinjamanHistory() {
-    // Sample data for Pinjaman transactions
     final List<Map<String, dynamic>> transactions = [
       {
         'date': '17 Mei 2025',
@@ -257,7 +206,7 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
         'type': 'Angsuran',
         'amount': 'Rp 2.000.000',
         'status': 'success',
-        'description': 'Pembayaran angsuran bulan Mei'
+        'description': 'Pembayaran angsuran bulan Mei',
       },
       {
         'date': '17 Apr 2025',
@@ -265,7 +214,7 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
         'type': 'Angsuran',
         'amount': 'Rp 2.000.000',
         'status': 'success',
-        'description': 'Pembayaran angsuran bulan April'
+        'description': 'Pembayaran angsuran bulan April',
       },
       {
         'date': '15 Mar 2025',
@@ -273,7 +222,7 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
         'type': 'Angsuran',
         'amount': 'Rp 2.000.000',
         'status': 'success',
-        'description': 'Pembayaran angsuran bulan Maret'
+        'description': 'Pembayaran angsuran bulan Maret',
       },
       {
         'date': '01 Mar 2025',
@@ -281,27 +230,34 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
         'type': 'Pencairan',
         'amount': 'Rp 20.000.000',
         'status': 'info',
-        'description': 'Pencairan pinjaman baru'
+        'description': 'Pencairan pinjaman baru',
       },
     ];
 
+    return _buildTransactionList(transactions, 'Tidak ada riwayat pinjaman');
+  }
+
+  Widget _buildTransactionList(
+    List<Map<String, dynamic>> transactions,
+    String emptyMsg,
+  ) {
     return transactions.isEmpty
-        ? _buildEmptyState('Tidak ada riwayat pinjaman')
+        ? _buildEmptyState(emptyMsg)
         : ListView.builder(
-            padding: const EdgeInsets.all(0),
-            itemCount: transactions.length,
-            itemBuilder: (context, index) {
-              final transaction = transactions[index];
-              return _buildTransactionCard(
-                date: transaction['date'],
-                time: transaction['time'],
-                type: transaction['type'],
-                amount: transaction['amount'],
-                status: transaction['status'],
-                description: transaction['description'],
-              );
-            },
-          );
+          padding: EdgeInsets.zero,
+          itemCount: transactions.length,
+          itemBuilder: (context, index) {
+            final t = transactions[index];
+            return _buildTransactionCard(
+              date: t['date'],
+              time: t['time'],
+              type: t['type'],
+              amount: t['amount'],
+              status: t['status'],
+              description: t['description'],
+            );
+          },
+        );
   }
 
   Widget _buildTransactionCard({
@@ -312,10 +268,9 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
     required String status,
     required String description,
   }) {
-    // Define colors based on status
     Color statusColor;
     IconData statusIcon;
-    
+
     switch (status) {
       case 'success':
         statusColor = Colors.green;
@@ -341,15 +296,12 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       elevation: 2,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Status icon
             Container(
               width: 40,
               height: 40,
@@ -360,8 +312,6 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
               child: Icon(statusIcon, color: statusColor, size: 24),
             ),
             const SizedBox(width: 12),
-            
-            // Transaction details
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -380,7 +330,10 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
                       Text(
                         amount,
                         style: TextStyle(
-                          color: amount.contains('+') ? Colors.green : const Color(0xFF4E342E),
+                          color:
+                              amount.contains('+')
+                                  ? Colors.green
+                                  : const Color(0xFF4E342E),
                           fontSize: 16,
                           fontWeight: FontWeight.w700,
                         ),
@@ -390,15 +343,16 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
                   const SizedBox(height: 4),
                   Text(
                     description,
-                    style: const TextStyle(
-                      color: Colors.black87,
-                      fontSize: 14,
-                    ),
+                    style: const TextStyle(color: Colors.black87, fontSize: 14),
                   ),
                   const SizedBox(height: 8),
                   Row(
                     children: [
-                      const Icon(Icons.calendar_today, size: 14, color: Colors.grey),
+                      const Icon(
+                        Icons.calendar_today,
+                        size: 14,
+                        color: Colors.grey,
+                      ),
                       const SizedBox(width: 4),
                       Text(
                         date,
@@ -408,7 +362,11 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
                         ),
                       ),
                       const SizedBox(width: 12),
-                      const Icon(Icons.access_time, size: 14, color: Colors.grey),
+                      const Icon(
+                        Icons.access_time,
+                        size: 14,
+                        color: Colors.grey,
+                      ),
                       const SizedBox(width: 4),
                       Text(
                         time,
@@ -433,11 +391,7 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
-            Icons.history,
-            size: 80,
-            color: Colors.grey.shade400,
-          ),
+          Icon(Icons.history, size: 80, color: Colors.grey.shade400),
           const SizedBox(height: 16),
           Text(
             message,
@@ -450,28 +404,10 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
           const SizedBox(height: 8),
           Text(
             'Transaksi Anda akan muncul di sini',
-            style: TextStyle(
-              color: Colors.grey.shade500,
-              fontSize: 14,
-            ),
+            style: TextStyle(color: Colors.grey.shade500, fontSize: 14),
           ),
         ],
       ),
     );
-  }
-
-  String _getStatusText(String status) {
-    switch (status) {
-      case 'success':
-        return 'Berhasil';
-      case 'warning':
-        return 'Perlu Perhatian';
-      case 'error':
-        return 'Gagal';
-      case 'info':
-        return 'Informasi';
-      default:
-        return 'Tidak Diketahui';
-    }
   }
 }

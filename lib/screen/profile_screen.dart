@@ -133,7 +133,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   child: Material(
                     color: const Color(0xFFEEEEEE),
                     child: InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        _showProfilePictureDialog();
+                      },
                       splashColor: const Color(0xFFFFDC16).withOpacity(0.5),
                       child: AnimatedContainer(
                         duration: const Duration(milliseconds: 200),
@@ -169,25 +171,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Positioned(
                 right: 0,
                 bottom: 5,
-                child: Container(
-                  width: 32,
-                  height: 32,
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFFFDC16),
-                    shape: BoxShape.circle,
-                    border: Border.all(color: Colors.white, width: 2),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.2),
-                        blurRadius: 6,
-                        offset: const Offset(0, 2),
-                      ),
-                    ],
-                  ),
-                  child: const Icon(
-                    Icons.camera_alt,
-                    size: 16,
-                    color: Color(0xFF4E342E),
+                child: GestureDetector(
+                  onTap: () {
+                    _showProfilePictureDialog();
+                  },
+                  child: Container(
+                    width: 32,
+                    height: 32,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFFFDC16),
+                      shape: BoxShape.circle,
+                      border: Border.all(color: Colors.white, width: 2),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.2),
+                          blurRadius: 6,
+                          offset: const Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    child: const Icon(
+                      Icons.camera_alt,
+                      size: 16,
+                      color: Color(0xFF4E342E),
+                    ),
                   ),
                 ),
               ),
@@ -236,6 +243,172 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
+  // Method untuk menampilkan dialog pemilihan foto profil
+  void _showProfilePictureDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Container(
+            width: 300,
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Header
+                Row(
+                  children: [
+                    GestureDetector(
+                      onTap: () => Navigator.of(context).pop(),
+                      child: const Icon(
+                        Icons.close,
+                        color: Color(0xFF4E342E),
+                        size: 24,
+                      ),
+                    ),
+                    const Expanded(
+                      child: Text(
+                        'Foto Profile',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                          color: Color(0xFF4E342E),
+                        ),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        // Handle delete action
+                        Navigator.of(context).pop();
+                      },
+                      child: const Icon(
+                        Icons.delete_outline,
+                        color: Color(0xFF4E342E),
+                        size: 24,
+                      ),
+                    ),
+                  ],
+                ),
+
+                const SizedBox(height: 30),
+
+                // Options
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    // Camera option
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pop();
+                        // Handle camera selection
+                        _handleCameraSelection();
+                      },
+                      child: Container(
+                        width: 80,
+                        height: 80,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFFFDC16).withOpacity(0.2),
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(
+                            color: const Color(0xFFFFDC16),
+                            width: 1,
+                          ),
+                        ),
+                        child: const Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.camera_alt,
+                              size: 32,
+                              color: Color(0xFFFFDC16),
+                            ),
+                            SizedBox(height: 8),
+                            Text(
+                              'Kamera',
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500,
+                                color: Color(0xFF4E342E),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+
+                    // Gallery option
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pop();
+                        // Handle gallery selection
+                        _handleGallerySelection();
+                      },
+                      child: Container(
+                        width: 80,
+                        height: 80,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFFFDC16).withOpacity(0.2),
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(
+                            color: const Color(0xFFFFDC16),
+                            width: 1,
+                          ),
+                        ),
+                        child: const Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.photo_library,
+                              size: 32,
+                              color: Color(0xFFFFDC16),
+                            ),
+                            SizedBox(height: 8),
+                            Text(
+                              'Galeri',
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500,
+                                color: Color(0xFF4E342E),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+
+                const SizedBox(height: 20),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  // Method untuk menangani pemilihan kamera
+  void _handleCameraSelection() {
+    // Implementasi untuk membuka kamera
+    print('Kamera dipilih');
+    // Anda bisa menggunakan image_picker package di sini
+    // final ImagePicker picker = ImagePicker();
+    // final XFile? image = await picker.pickImage(source: ImageSource.camera);
+  }
+
+  // Method untuk menangani pemilihan galeri
+  void _handleGallerySelection() {
+    // Implementasi untuk membuka galeri
+    print('Galeri dipilih');
+    // Anda bisa menggunakan image_picker package di sini
+    // final ImagePicker picker = ImagePicker();
+    // final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+  }
+
   Widget _buildProfileCard(BuildContext context) {
     return Card(
       elevation: 2,
@@ -251,7 +424,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               color: Colors.black.withOpacity(0.1),
               blurRadius: 12,
               spreadRadius: 2,
-              offset: Offset(0, 6),
+              offset: const Offset(0, 6),
             ),
           ],
         ),
@@ -348,7 +521,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               color: Colors.black.withOpacity(0.1),
               blurRadius: 12,
               spreadRadius: 2,
-              offset: Offset(0, 6),
+              offset: const Offset(0, 6),
             ),
           ],
         ),
@@ -367,7 +540,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         color: Colors.black.withOpacity(0.1),
                         blurRadius: 12,
                         spreadRadius: 2,
-                        offset: Offset(0, 6),
+                        offset: const Offset(0, 6),
                       ),
                     ],
                   ),

@@ -12,7 +12,6 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool _obscurePassword = true;
-  bool _rememberMe = false;
 
   @override
   void dispose() {
@@ -101,7 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       end: Alignment.bottomRight,
                     ).createShader(bounds),
                     child: const Text(
-                      'KOPERASI',
+                      'KOPASMEN',
                       style: TextStyle(
                         fontFamily: 'Poppins',
                         fontSize: 28,
@@ -115,7 +114,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   
                   // Tagline
                   Text(
-                    'Membangun Ekonomi Bersama',
+                    'Koperasi Pegawai SMEA Negeri',
                     style: TextStyle(
                       color: const Color(0xFF5D4037).withOpacity(0.8),
                       fontFamily: 'Poppins',
@@ -265,44 +264,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         
                         const SizedBox(height: 16),
-                        
-                        // Remember Me Checkbox & Forgot Password
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            // Remember Me
-                            Row(
-                              children: [
-                                SizedBox(
-                                  width: 24,
-                                  height: 24,
-                                  child: Checkbox(
-                                    value: _rememberMe,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        _rememberMe = value!;
-                                      });
-                                    },
-                                    activeColor: const Color(0xFFFFDC16),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(4),
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(width: 8),
-                                Text(
-                                  'Remember Me',
-                                  style: TextStyle(
-                                    color: Colors.black.withOpacity(0.7),
-                                    fontFamily: 'Poppins',
-                                    fontSize: 12,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        
+
                         const SizedBox(height: 24),
                         
                         // Login Button with gradient
