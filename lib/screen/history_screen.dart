@@ -88,7 +88,7 @@ class _HistoryScreenState extends State<HistoryScreen> with SingleTickerProvider
                 MaterialPageRoute(builder: (context) => const KoperasiApp()),
               );
             },
-            child: Container(
+            child: SizedBox(
               width: 36,
               height: 36,
                     child: IconButton(
