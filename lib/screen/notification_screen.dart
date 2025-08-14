@@ -21,58 +21,28 @@ class NotificationScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildAppBar(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 6),
-      decoration: const BoxDecoration(
-        color: Color(0xFFFFDC16),
-        borderRadius: BorderRadius.only(
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Color(0x29000000),
-            offset: Offset(0, 3),
-            blurRadius: 6,
-          ),
-        ],
+  PreferredSizeWidget _buildAppBar(BuildContext context) {
+    return AppBar(
+      backgroundColor: const Color(0xFFFFDC16),
+      elevation: 0,
+      toolbarHeight: 69,
+      leading: IconButton(
+        icon: const Icon(Icons.arrow_back, color: Color(0xFF4E342E)),
+        onPressed: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const KoperasiApp()),
+          );
+        },
+        splashRadius: 24,
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  // Ganti GestureDetector dan Container lama dengan ini:
-                  Container(
-                    child: IconButton(
-                      icon: const Icon(Icons.arrow_back, color: Color(0xFF4E342E)),
-                      onPressed: () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(builder: (context) => const KoperasiApp()),
-                        );
-                      },
-                      splashRadius: 24,
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  const Text(
-                    'Notifikasi',
-                    style: TextStyle(
-                      color: Color(0xFF4E342E),
-                      fontSize: 18,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-        ],
+      title: const Text(
+        'Notifikasi',
+        style: TextStyle(
+          color: Color(0xFF4E342E),
+          fontSize: 18,
+          fontWeight: FontWeight.w700,
+        ),
       ),
     );
   }

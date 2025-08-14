@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'homepage.dart';
 
 class SimpananScreen extends StatefulWidget {
   const SimpananScreen({super.key});
@@ -29,7 +28,7 @@ class _SimpananScreenState extends State<SimpananScreen> with SingleTickerProvid
       backgroundColor: const Color(0xFFFAFAFA),
       appBar: AppBar(
         backgroundColor: const Color(0xFFFFDC16),
-        toolbarHeight: 56, 
+        toolbarHeight: 69, 
         elevation: 0,
         title: const Text(
           'Simpanan',

@@ -184,7 +184,7 @@ class HomePage extends StatelessWidget {
                           const SizedBox(height: 8),
                           
                           // Simpanan Section
-                          _buildSectionHeader(''),
+                          _buildSectionHeader('Simpanan'),
                           _buildSavingsCards(),
                           
                           const SizedBox(height: 8),
@@ -561,30 +561,6 @@ class HomePage extends StatelessWidget {
         'icon': Icons.savings_outlined,
         'category': 'simpanan',
       },
-      {
-        'title': 'Setoran Simpanan Sukarela',
-        'amount': 'Rp. 150.000',
-        'date': '1 Mei 2025',
-        'type': 'incoming',
-        'icon': Icons.account_balance_wallet_outlined,
-        'category': 'simpanan',
-      },
-      {
-        'title': 'Pencairan Pinjaman',
-        'amount': 'Rp. 5.000.000',
-        'date': '28 April 2025',
-        'type': 'incoming',
-        'icon': Icons.account_balance_outlined,
-        'category': 'pinjaman',
-      },
-      {
-        'title': 'Pembayaran Pinjaman',
-        'amount': 'Rp. 500.000',
-        'date': '10 April 2025',
-        'type': 'outgoing',
-        'icon': Icons.payments_outlined,
-        'category': 'pinjaman',
-      },
     ];
 
     return Card(
@@ -628,18 +604,6 @@ class HomePage extends StatelessWidget {
                     ),
                   ],
                 ),
-                TextButton(
-                  onPressed: () {
-                    // Navigate to detailed history screen
-                  },
-                  child: const Text(
-                    'Lihat Semua',
-                    style: TextStyle(
-                      color: Color(0xFFFFDC16),
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
               ],
             ),
             const Divider(),
@@ -647,20 +611,6 @@ class HomePage extends StatelessWidget {
             
             // Transaction list with improved styling
             ...historyItems.map((item) => _buildHistoryItem(item)),
-            
-            // Show more button
-            const SizedBox(height: 8),
-            if (historyItems.length > 5)
-              Center(
-                child: TextButton.icon(
-                  onPressed: () {},
-                  icon: const Icon(Icons.expand_more, color: Color(0xFF4E342E)),
-                  label: const Text(
-                    'Tampilkan Lebih Banyak',
-                    style: TextStyle(color: Color(0xFF4E342E)),
-                  ),
-                ),
-              ),
           ],
         ),
       ),

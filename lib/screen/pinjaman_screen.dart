@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'homepage.dart';
 
 class PinjamanScreen extends StatelessWidget {
   const PinjamanScreen({super.key});
@@ -7,9 +6,10 @@ class PinjamanScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[50],
+      backgroundColor: const Color(0xFFFAFAFA),
       appBar: AppBar(
         backgroundColor: const Color(0xFFFFDC16),
+        toolbarHeight: 69, 
         elevation: 0,
         title: const Text(
           'Pinjaman',
@@ -17,7 +17,6 @@ class PinjamanScreen extends StatelessWidget {
             color: Color(0xFF4E342E),
             fontSize: 18,
             fontWeight: FontWeight.w700,
-            fontFamily: 'Poppins',
           ),
         ),
       ),
