@@ -9,7 +9,7 @@ class PinjamanScreen extends StatelessWidget {
       backgroundColor: const Color(0xFFFAFAFA),
       appBar: AppBar(
         backgroundColor: const Color(0xFFFFDC16),
-        toolbarHeight: 69, 
+        toolbarHeight: 69,
         elevation: 0,
         title: const Text(
           'Pinjaman',
@@ -32,28 +32,29 @@ class PinjamanContent extends StatefulWidget {
   State<PinjamanContent> createState() => _PinjamanContentState();
 }
 
-class _PinjamanContentState extends State<PinjamanContent> with SingleTickerProviderStateMixin {
+class _PinjamanContentState extends State<PinjamanContent>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  
+
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
   }
-  
+
   @override
   void dispose() {
     _tabController.dispose();
     super.dispose();
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         // User loan summary card
         const UserLoanSummaryCard(),
-        
+
         // Loan Types Tab Bar
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -80,22 +81,13 @@ class _PinjamanContentState extends State<PinjamanContent> with SingleTickerProv
               fontSize: 14,
             ),
             tabs: const [
-              Tab(
-                icon: Icon(Icons.account_balance),
-                text: 'Reguler',
-              ),
-              Tab(
-                icon: Icon(Icons.store),
-                text: 'Usaha',
-              ),
-              Tab(
-                icon: Icon(Icons.shopping_cart),
-                text: 'Barang',
-              ),
+              Tab(icon: Icon(Icons.account_balance), text: 'Reguler'),
+              Tab(icon: Icon(Icons.store), text: 'Usaha'),
+              Tab(icon: Icon(Icons.shopping_cart), text: 'Barang'),
             ],
           ),
         ),
-        
+
         // Tab content
         Expanded(
           child: TabBarView(
@@ -103,10 +95,10 @@ class _PinjamanContentState extends State<PinjamanContent> with SingleTickerProv
             children: const [
               // Reguler loan tab
               RegulerLoanContent(),
-              
+
               // Usaha loan tab
               UsahaLoanContent(),
-              
+
               // Barang loan tab
               BarangLoanContent(),
             ],
@@ -126,7 +118,7 @@ class LoanHistoryItem extends StatelessWidget {
   final bool isCompleted;
   final String loanType;
   final String? itemName;
-  
+
   const LoanHistoryItem({
     super.key,
     required this.remainingAmount,
@@ -159,11 +151,17 @@ class LoanHistoryItem extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             decoration: BoxDecoration(
-              color: isCompleted ? Colors.green.shade50 : const Color(0xFFFFF9C4),
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+              color:
+                  isCompleted ? Colors.green.shade50 : const Color(0xFFFFF9C4),
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(12),
+              ),
               border: Border(
                 bottom: BorderSide(
-                  color: isCompleted ? Colors.green.shade200 : const Color(0xFFFFDC16).withOpacity(0.5),
+                  color:
+                      isCompleted
+                          ? Colors.green.shade200
+                          : const Color(0xFFFFDC16).withOpacity(0.5),
                 ),
               ),
             ),
@@ -172,11 +170,16 @@ class LoanHistoryItem extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    color: isCompleted ? Colors.green.withOpacity(0.2) : const Color(0xFFFFDC16).withOpacity(0.2),
+                    color:
+                        isCompleted
+                            ? Colors.green.withOpacity(0.2)
+                            : const Color(0xFFFFDC16).withOpacity(0.2),
                     shape: BoxShape.circle,
                   ),
                   child: Icon(
-                    isCompleted ? Icons.check_circle : getIconForLoanType(loanType),
+                    isCompleted
+                        ? Icons.check_circle
+                        : getIconForLoanType(loanType),
                     color: isCompleted ? Colors.green : const Color(0xFF4E342E),
                     size: 16,
                   ),
@@ -208,20 +211,26 @@ class LoanHistoryItem extends StatelessWidget {
                 ),
                 const Spacer(),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 2,
+                  ),
                   decoration: BoxDecoration(
-                    color: isCompleted ? Colors.green.withOpacity(0.1) : Colors.orange.withOpacity(0.1),
+                    color:
+                        isCompleted
+                            ? Colors.green.withOpacity(0.1)
+                            : Colors.orange.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(4),
                     border: Border.all(
                       color: isCompleted ? Colors.green : Color(0xFFEF5350),
                       width: 1,
                     ),
                   ),
-                  
+
                   child: Text(
                     isCompleted ? 'Selesai' : 'Belum Lunas',
                     style: TextStyle(
-                      color: isCompleted ? Colors.green :  Color(0xFFEF5350),
+                      color: isCompleted ? Colors.green : Color(0xFFEF5350),
                       fontSize: 12,
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.w600,
@@ -231,7 +240,7 @@ class LoanHistoryItem extends StatelessWidget {
               ],
             ),
           ),
-          
+
           // Loan details
           Padding(
             padding: const EdgeInsets.all(16),
@@ -260,9 +269,9 @@ class LoanHistoryItem extends StatelessWidget {
                     ),
                   ],
                 ),
-                
+
                 const SizedBox(height: 8),
-                
+
                 // Payment amount row
                 Row(
                   children: [
@@ -286,9 +295,9 @@ class LoanHistoryItem extends StatelessWidget {
                     ),
                   ],
                 ),
-                
+
                 const SizedBox(height: 8),
-                
+
                 // Last payment date row
                 Row(
                   children: [
@@ -312,9 +321,9 @@ class LoanHistoryItem extends StatelessWidget {
                     ),
                   ],
                 ),
-                
+
                 const SizedBox(height: 8),
-                
+
                 // Remaining months row
                 Row(
                   children: [
@@ -338,15 +347,18 @@ class LoanHistoryItem extends StatelessWidget {
                     ),
                   ],
                 ),
-                
+
                 if (!isCompleted) ...[
                   const SizedBox(height: 16),
-                  
+
                   // Progress bar
                   Column(
                     children: [
                       LinearProgressIndicator(
-                        value: 1 - (remainingMonths / 12), // Assuming 12 months total tenor
+                        value:
+                            1 -
+                            (remainingMonths /
+                                12), // Assuming 12 months total tenor
                         backgroundColor: Colors.grey.shade200,
                         valueColor: AlwaysStoppedAnimation<Color>(
                           const Color(0xFFFFDC16),
@@ -382,7 +394,7 @@ class LoanHistoryItem extends StatelessWidget {
               ],
             ),
           ),
-          
+
           // Buttons row
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
@@ -425,9 +437,7 @@ class LoanHistoryItem extends StatelessWidget {
                     ),
                   ),
                 ),
-                if (!isCompleted) ...[
-                  const SizedBox(width: 12),
-                ],
+                if (!isCompleted) ...[const SizedBox(width: 12)],
               ],
             ),
           ),
@@ -435,7 +445,7 @@ class LoanHistoryItem extends StatelessWidget {
       ),
     );
   }
-  
+
   IconData getIconForLoanType(String type) {
     switch (type) {
       case 'Reguler':
@@ -459,7 +469,7 @@ class LoanDetailDialog extends StatelessWidget {
   final int remainingMonths;
   final bool isCompleted;
   final String? itemName;
-  
+
   const LoanDetailDialog({
     super.key,
     required this.loanType,
@@ -474,18 +484,23 @@ class LoanDetailDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Calculate total duration and progress
-    final totalMonths = remainingMonths + (12 - remainingMonths); // Assuming 12 months total for simplicity
+    final totalMonths =
+        remainingMonths +
+        (12 - remainingMonths); // Assuming 12 months total for simplicity
     final progress = (totalMonths - remainingMonths) / totalMonths;
-    
+
     // Calculate next payment date (simple example)
     final currentDate = DateTime.now();
-    final nextPaymentDate = DateTime(currentDate.year, currentDate.month + 1, 20);
-    final formattedNextPayment = "${nextPaymentDate.day} ${getMonthName(nextPaymentDate.month)} ${nextPaymentDate.year}";
-    
+    final nextPaymentDate = DateTime(
+      currentDate.year,
+      currentDate.month + 1,
+      20,
+    );
+    final formattedNextPayment =
+        "${nextPaymentDate.day} ${getMonthName(nextPaymentDate.month)} ${nextPaymentDate.year}";
+
     return Dialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: Container(
         padding: const EdgeInsets.all(24),
         child: Column(
@@ -534,14 +549,17 @@ class LoanDetailDialog extends StatelessWidget {
                 ),
               ],
             ),
-            
+
             const SizedBox(height: 24),
-            
+
             // Status indicator
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               decoration: BoxDecoration(
-                color: isCompleted ? Colors.green.withOpacity(0.1) : const Color(0xFFFFF9C4),
+                color:
+                    isCompleted
+                        ? Colors.green.withOpacity(0.1)
+                        : const Color(0xFFFFF9C4),
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(
                   color: isCompleted ? Colors.green : const Color(0xFFFFDC16),
@@ -559,7 +577,8 @@ class LoanDetailDialog extends StatelessWidget {
                   Text(
                     isCompleted ? 'Lunas' : 'Sedang Berjalan',
                     style: TextStyle(
-                      color: isCompleted ? Colors.green : const Color(0xFF4E342E),
+                      color:
+                          isCompleted ? Colors.green : const Color(0xFF4E342E),
                       fontSize: 14,
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.w600,
@@ -568,9 +587,9 @@ class LoanDetailDialog extends StatelessWidget {
                 ],
               ),
             ),
-            
+
             const SizedBox(height: 24),
-            
+
             // Detailed information
             const Text(
               'Informasi Pinjaman',
@@ -581,9 +600,9 @@ class LoanDetailDialog extends StatelessWidget {
                 fontWeight: FontWeight.w700,
               ),
             ),
-            
+
             const SizedBox(height: 16),
-            
+
             // Details table
             Container(
               decoration: BoxDecoration(
@@ -593,20 +612,40 @@ class LoanDetailDialog extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  _buildDetailRow('Total Pinjaman', 'Rp. ${(int.parse(remainingAmount.replaceAll('.', '')) + int.parse(paymentAmount.replaceAll('.', '')) * (totalMonths - remainingMonths)).toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]}.')}', false),
-                  _buildDetailRow('Sisa Pinjaman', 'Rp. $remainingAmount', false),
-                  _buildDetailRow('Cicilan per Bulan', 'Rp. $paymentAmount', false),
+                  _buildDetailRow(
+                    'Total Pinjaman',
+                    'Rp. ${(int.parse(remainingAmount.replaceAll('.', '')) + int.parse(paymentAmount.replaceAll('.', '')) * (totalMonths - remainingMonths)).toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]}.')}',
+                    false,
+                  ),
+                  _buildDetailRow(
+                    'Sisa Pinjaman',
+                    'Rp. $remainingAmount',
+                    false,
+                  ),
+                  _buildDetailRow(
+                    'Cicilan per Bulan',
+                    'Rp. $paymentAmount',
+                    false,
+                  ),
                   _buildDetailRow('Total Tenor', '$totalMonths Bulan', false),
-                  _buildDetailRow('Sisa Tenor', '$remainingMonths Bulan', false),
+                  _buildDetailRow(
+                    'Sisa Tenor',
+                    '$remainingMonths Bulan',
+                    false,
+                  ),
                   _buildDetailRow('Tanggal Pembayaran', paymentDate, false),
-                  _buildDetailRow('Pembayaran Selanjutnya', formattedNextPayment, true),
+                  _buildDetailRow(
+                    'Pembayaran Selanjutnya',
+                    formattedNextPayment,
+                    true,
+                  ),
                 ],
               ),
             ),
-            
+
             if (!isCompleted) ...[
               const SizedBox(height: 24),
-              
+
               // Payment progress
               const Text(
                 'Progres Pembayaran',
@@ -617,9 +656,9 @@ class LoanDetailDialog extends StatelessWidget {
                   fontWeight: FontWeight.w700,
                 ),
               ),
-              
+
               const SizedBox(height: 12),
-              
+
               Column(
                 children: [
                   LinearProgressIndicator(
@@ -658,9 +697,9 @@ class LoanDetailDialog extends StatelessWidget {
                 ],
               ),
             ],
-            
+
             const SizedBox(height: 24),
-            
+
             // Action buttons
             Row(
               children: [
@@ -690,8 +729,7 @@ class LoanDetailDialog extends StatelessWidget {
                       ),
                     ),
                   ),
-                if (!isCompleted)
-                  const SizedBox(width: 12),
+                if (!isCompleted) const SizedBox(width: 12),
               ],
             ),
           ],
@@ -699,12 +737,15 @@ class LoanDetailDialog extends StatelessWidget {
       ),
     );
   }
-  
+
   Widget _buildDetailRow(String label, String value, bool isLast) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: BoxDecoration(
-        border: isLast ? null : Border(bottom: BorderSide(color: Colors.grey.shade200)),
+        border:
+            isLast
+                ? null
+                : Border(bottom: BorderSide(color: Colors.grey.shade200)),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -730,7 +771,7 @@ class LoanDetailDialog extends StatelessWidget {
       ),
     );
   }
-  
+
   IconData getIconForLoanType(String type) {
     switch (type) {
       case 'Reguler':
@@ -743,11 +784,21 @@ class LoanDetailDialog extends StatelessWidget {
         return Icons.monetization_on;
     }
   }
-  
+
   String getMonthName(int month) {
     const months = [
-      'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
-      'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+      'Januari',
+      'Februari',
+      'Maret',
+      'April',
+      'Mei',
+      'Juni',
+      'Juli',
+      'Agustus',
+      'September',
+      'Oktober',
+      'November',
+      'Desember',
     ];
     return months[month - 1];
   }
@@ -764,7 +815,7 @@ class RegulerLoanContent extends StatelessWidget {
         children: [
           // Section divider
           const SectionDivider(title: 'Riwayat Pinjaman Reguler'),
-          
+
           // Loan history items
           const LoanHistoryItem(
             remainingAmount: '1.100.000',
@@ -774,9 +825,9 @@ class RegulerLoanContent extends StatelessWidget {
             isCompleted: false,
             loanType: 'Reguler',
           ),
-          
+
           const SizedBox(height: 16),
-          
+
           const LoanHistoryItem(
             remainingAmount: '0',
             paymentAmount: '00.000',
@@ -802,7 +853,7 @@ class UsahaLoanContent extends StatelessWidget {
         children: [
           // Section divider
           const SectionDivider(title: 'Riwayat Pinjaman Usaha'),
-          
+
           // Loan history item
           const LoanHistoryItem(
             remainingAmount: '4.500.000',
@@ -829,7 +880,7 @@ class BarangLoanContent extends StatelessWidget {
         children: [
           // Section divider
           const SectionDivider(title: 'Riwayat Pinjaman Barang'),
-          
+
           // Loan history item
           const LoanHistoryItem(
             remainingAmount: '2.400.000',
@@ -850,7 +901,7 @@ class AvailableItemCard extends StatelessWidget {
   final String name;
   final String price;
   final IconData imageIcon;
-  
+
   const AvailableItemCard({
     super.key,
     required this.name,
@@ -880,18 +931,18 @@ class AvailableItemCard extends StatelessWidget {
             height: 100,
             decoration: BoxDecoration(
               color: const Color(0xFFFFF9C4),
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
-              border: Border.all(color: const Color(0xFFFFDC16).withOpacity(0.5)),
-            ),
-            child: Center(
-              child: Icon(
-                imageIcon,
-                size: 48,
-                color: const Color(0xFF4E342E),
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(12),
+              ),
+              border: Border.all(
+                color: const Color(0xFFFFDC16).withOpacity(0.5),
               ),
             ),
+            child: Center(
+              child: Icon(imageIcon, size: 48, color: const Color(0xFF4E342E)),
+            ),
           ),
-          
+
           // Item details
           Padding(
             padding: const EdgeInsets.all(12),
@@ -1021,9 +1072,9 @@ class UserLoanSummaryCard extends StatelessWidget {
               ],
             ),
           ),
-          
+
           const Divider(height: 1, thickness: 1, color: Color(0xFFCCCCCC)),
-          
+
           // NIP section
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
@@ -1051,9 +1102,9 @@ class UserLoanSummaryCard extends StatelessWidget {
               ],
             ),
           ),
-          
+
           const Divider(height: 1, thickness: 1, color: Color(0xFFCCCCCC)),
-          
+
           // Loan summary section with different types
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
@@ -1082,9 +1133,9 @@ class UserLoanSummaryCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                
+
                 const SizedBox(height: 12),
-                
+
                 // Loan types breakdown
                 Container(
                   padding: const EdgeInsets.all(12),
@@ -1127,9 +1178,9 @@ class UserLoanSummaryCard extends StatelessWidget {
                           ),
                         ],
                       ),
-                      
+
                       const SizedBox(height: 8),
-                      
+
                       // Usaha loan
                       Row(
                         children: [
@@ -1162,9 +1213,9 @@ class UserLoanSummaryCard extends StatelessWidget {
                           ),
                         ],
                       ),
-                      
+
                       const SizedBox(height: 8),
-                      
+
                       // Barang loan
                       Row(
                         children: [
@@ -1203,9 +1254,9 @@ class UserLoanSummaryCard extends StatelessWidget {
               ],
             ),
           ),
-          
+
           const Divider(height: 1, thickness: 1, color: Color(0xFFCCCCCC)),
-          
+
           // Remaining loan section
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
@@ -1222,7 +1273,10 @@ class UserLoanSummaryCard extends StatelessWidget {
                 ),
                 const Spacer(),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 2,
+                  ),
                   decoration: BoxDecoration(
                     color: const Color(0xFFFFDC16),
                     borderRadius: BorderRadius.circular(6),
@@ -1248,11 +1302,8 @@ class UserLoanSummaryCard extends StatelessWidget {
 
 class SectionDivider extends StatelessWidget {
   final String title;
-  
-  const SectionDivider({
-    super.key,
-    required this.title,
-  });
+
+  const SectionDivider({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -1270,12 +1321,7 @@ class SectionDivider extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 8),
-          Expanded(
-            child: Container(
-              height: 1,
-              color: Colors.grey.shade300,
-            ),
-          ),
+          Expanded(child: Container(height: 1, color: Colors.grey.shade300)),
         ],
       ),
     );
@@ -1288,7 +1334,7 @@ class TotalLoanSummaryCard extends StatelessWidget {
   final String loanType;
   final String interestRate;
   final String? itemName;
-  
+
   const TotalLoanSummaryCard({
     super.key,
     required this.totalAmount,
@@ -1330,7 +1376,7 @@ class TotalLoanSummaryCard extends StatelessWidget {
               ),
             ],
           ),
-          
+
           if (itemName != null) ...[
             const SizedBox(height: 8),
             Text(
@@ -1343,9 +1389,9 @@ class TotalLoanSummaryCard extends StatelessWidget {
               ),
             ),
           ],
-          
+
           const SizedBox(height: 12),
-          
+
           // Total amount row
           Row(
             children: [
@@ -1369,9 +1415,9 @@ class TotalLoanSummaryCard extends StatelessWidget {
               ),
             ],
           ),
-          
+
           const SizedBox(height: 8),
-          
+
           // Duration row
           Row(
             children: [
@@ -1395,9 +1441,9 @@ class TotalLoanSummaryCard extends StatelessWidget {
               ),
             ],
           ),
-          
+
           const SizedBox(height: 8),
-          
+
           // Interest rate row
           Row(
             children: [

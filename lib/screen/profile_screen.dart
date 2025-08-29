@@ -459,7 +459,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
             // Static information fields
             _infoField(Icons.person, 'Nama', 'Ujang Pedro'),
-            _infoField(Icons.badge, 'NIP', '123456789'),
+            _infoField(Icons.credit_card, 'NIP', '123456789'),
+            _infoField(Icons.badge, 'Nomor Anggota', '123456789'),
             _infoField(Icons.wc, 'Jenis Kelamin', 'Laki-laki'),
             _infoField(
               Icons.calendar_today,
