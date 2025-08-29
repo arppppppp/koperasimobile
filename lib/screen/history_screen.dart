@@ -51,7 +51,13 @@ class _HistoryScreenState extends State<HistoryScreen>
       body: SafeArea(
         child: Column(
           children: [
+            // Header
+            _buildHeader(),
+
+            // Filter & Search Section
             _buildFilterSection(),
+
+            // Tab menu
             Container(
               color: Colors.white,
               child: TabBar(
@@ -60,13 +66,21 @@ class _HistoryScreenState extends State<HistoryScreen>
                 unselectedLabelColor: Colors.grey,
                 indicatorColor: const Color(0xFFFFDC16),
                 indicatorWeight: 3,
-                tabs: const [Tab(text: 'Simpanan'), Tab(text: 'Pinjaman')],
+                tabs: const [
+                  Tab(text: 'Simpanan'),
+                  Tab(text: 'Pinjaman'),
+                ],
               ),
             ),
+
+            // Tab content
             Expanded(
               child: TabBarView(
                 controller: _tabController,
-                children: [_buildSimpananHistory(), _buildPinjamanHistory()],
+                children: [
+                  _buildSimpananHistory(),
+                  _buildPinjamanHistory(),
+                ],
               ),
             ),
           ],
@@ -75,6 +89,23 @@ class _HistoryScreenState extends State<HistoryScreen>
     );
   }
 
+  /// 🔹 HEADER
+  Widget _buildHeader() {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      alignment: Alignment.centerLeft,
+      child: const Text(
+        "Riwayat Transaksi",
+        style: TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+          color: Color(0xFF4E342E),
+        ),
+      ),
+    );
+  }
+
+  /// 🔹 FILTER
   Widget _buildFilterSection() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
@@ -102,54 +133,42 @@ class _HistoryScreenState extends State<HistoryScreen>
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
-              children:
-                  _filterOptions.map((filter) {
-                    bool isSelected = _selectedFilter == filter;
-                    return GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          _selectedFilter = filter;
-                        });
-                      },
-                      child: Container(
-                        margin: const EdgeInsets.only(right: 10),
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 16,
-                          vertical: 8,
-                        ),
-                        decoration: BoxDecoration(
-                          color:
-                              isSelected
-                                  ? const Color(0xFFFFDC16)
-                                  : Colors.white,
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(
-                            color:
-                                isSelected
-                                   
+              children: _filterOptions.map((filter) {
+                bool isSelected = _selectedFilter == filter;
+                return GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      _selectedFilter = filter;
+                    });
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.only(right: 10),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 8,
+                    ),
+                    decoration: BoxDecoration(
+                      color: isSelected ? const Color(0xFFFFDC16) : Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(
+                        color: isSelected
                             ? const Color(0xFFFFDC16)
-                                   
                             : Colors.grey.shade300,
-                          ),
-                        ),
-                        child: Text(
-                          filter,
-                          style: TextStyle(
-                            color:
-                                isSelected
-                                   
-                            ? const Color(0xFF4E342E)
-                                   
-                            : Colors.grey,
-                            fontWeight:
-                                isSelected
-                            ? FontWeight.w600
-                            : FontWeight.w400,
-                          ),
-                        ),
                       ),
-                    );
-                  }).toList(),
+                    ),
+                    child: Text(
+                      filter,
+                      style: TextStyle(
+                        color: isSelected
+                            ? const Color(0xFF4E342E)
+                            : Colors.grey,
+                        fontWeight:
+                            isSelected ? FontWeight.w600 : FontWeight.w400,
+                      ),
+                    ),
+                  ),
+                );
+              }).toList(),
             ),
           ),
         ],
@@ -157,6 +176,7 @@ class _HistoryScreenState extends State<HistoryScreen>
     );
   }
 
+  /// 🔹 DATA SIMPANAN
   Widget _buildSimpananHistory() {
     final List<Map<String, dynamic>> transactions = [
       {
@@ -204,6 +224,7 @@ class _HistoryScreenState extends State<HistoryScreen>
     return _buildTransactionList(transactions, 'Tidak ada riwayat simpanan');
   }
 
+  /// 🔹 DATA PINJAMAN
   Widget _buildPinjamanHistory() {
     final List<Map<String, dynamic>> transactions = [
       {
@@ -243,34 +264,31 @@ class _HistoryScreenState extends State<HistoryScreen>
     return _buildTransactionList(transactions, 'Tidak ada riwayat pinjaman');
   }
 
+  /// 🔹 LIST TRANSAKSI (versi fix, cuma 1 fungsi)
   Widget _buildTransactionList(
     List<Map<String, dynamic>> transactions,
     String emptyMsg,
   ) {
-    return _buildTransactionList(transactions, 'Tidak ada riwayat pinjaman');
-  }
-
-  Widget _buildTransactionList(
-      List<Map<String, dynamic>> transactions, String emptyMsg) {
     return transactions.isEmpty
         ? _buildEmptyState(emptyMsg)
         : ListView.builder(
-          padding: EdgeInsets.zero,
-          itemCount: transactions.length,
-          itemBuilder: (context, index) {
-            final t = transactions[index];
-            return _buildTransactionCard(
-              date: t['date'],
-              time: t['time'],
-              type: t['type'],
-              amount: t['amount'],
-              status: t['status'],
-              description: t['description'],
-            );
-          },
-        );
+            padding: EdgeInsets.zero,
+            itemCount: transactions.length,
+            itemBuilder: (context, index) {
+              final t = transactions[index];
+              return _buildTransactionCard(
+                date: t['date'],
+                time: t['time'],
+                type: t['type'],
+                amount: t['amount'],
+                status: t['status'],
+                description: t['description'],
+              );
+            },
+          );
   }
 
+  /// 🔹 CARD TRANSAKSI
   Widget _buildTransactionCard({
     required String date,
     required String time,
@@ -341,11 +359,8 @@ class _HistoryScreenState extends State<HistoryScreen>
                       Text(
                         amount,
                         style: TextStyle(
-                          color:
-                              amount.contains('+')
-                                 
+                          color: amount.contains('+')
                               ? Colors.green
-                                 
                               : const Color(0xFF4E342E),
                           fontSize: 16,
                           fontWeight: FontWeight.w700,
@@ -356,17 +371,14 @@ class _HistoryScreenState extends State<HistoryScreen>
                   const SizedBox(height: 4),
                   Text(
                     description,
-                    style: const TextStyle(color: Colors.black87, fontSize: 14),
+                    style:
+                        const TextStyle(color: Colors.black87, fontSize: 14),
                   ),
                   const SizedBox(height: 8),
                   Row(
                     children: [
-                      const Icon(
-                        Icons.calendar_today,
-                       
-                          size: 14,
-                        color: Colors.grey,
-                      ),
+                      const Icon(Icons.calendar_today,
+                          size: 14, color: Colors.grey),
                       const SizedBox(width: 4),
                       Text(
                         date,
@@ -376,12 +388,8 @@ class _HistoryScreenState extends State<HistoryScreen>
                         ),
                       ),
                       const SizedBox(width: 12),
-                      const Icon(
-                        Icons.access_time,
-                       
-                          size: 14,
-                        color: Colors.grey,
-                      ),
+                      const Icon(Icons.access_time,
+                          size: 14, color: Colors.grey),
                       const SizedBox(width: 4),
                       Text(
                         time,
@@ -401,6 +409,7 @@ class _HistoryScreenState extends State<HistoryScreen>
     );
   }
 
+  /// 🔹 EMPTY STATE
   Widget _buildEmptyState(String message) {
     return Center(
       child: Column(
