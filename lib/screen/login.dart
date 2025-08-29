@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'forgot_password_screen.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -161,7 +163,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         Padding(
                           padding: const EdgeInsets.only(left: 4, bottom: 8),
                           child: Text(
-                            'Username',
+                            'No. Anggota',
                             style: TextStyle(
                               color: const Color(0xFF5D4037).withOpacity(0.9),
                               fontFamily: 'Poppins',
@@ -184,7 +186,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: TextField(
                             controller: _usernameController,
                             decoration: const InputDecoration(
-                              hintText: 'Enter your username',
+                              hintText: 'Masukkan Nomor Anggota',
                               hintStyle: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 14,
@@ -232,7 +234,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             controller: _passwordController,
                             obscureText: _obscurePassword,
                             decoration: InputDecoration(
-                              hintText: 'Enter your password',
+                              hintText: 'Masukkan Password',
                               hintStyle: const TextStyle(
                                 color: Colors.grey,
                                 fontSize: 14,
@@ -290,18 +292,49 @@ class _LoginScreenState extends State<LoginScreen> {
                             ],
                           ),
                           child: ElevatedButton(
-                            onPressed: () {
-                              if (_usernameController.text.isNotEmpty &&
-                                  _passwordController.text.isNotEmpty) {
-                                // Implement login logic
-                                Navigator.pushNamed(context, '/home');
-                              } else {
-                                // Show error or request to fill fields
+                            onPressed: () async {
+                              final nomor_anggota = _usernameController.text.trim();
+                              final password = _passwordController.text.trim();
+
+                              if (nomor_anggota.isEmpty || password.isEmpty) {
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Text('Please fill all fields'),
-                                    backgroundColor: Color(0xFF5D4037),
-                                  ),
+                                  const SnackBar(content: Text('Please fill all fields')),
+                                );
+                                return;
+                              }
+
+                              try {
+                                final url = Uri.parse("http://192.168.137.1:8000/api/anggota/login/");
+                                final response = await http.post(
+                                  url,
+                                  headers: {"Content-Type": "application/json"},
+                                  body: jsonEncode({
+                                    "nomor_anggota": nomor_anggota,
+                                    "password": password
+                                  }),
+                                );
+
+                                if (response.statusCode == 200) {
+                                  final data = json.decode(response.body);
+                                  if (data['success'] == true) {
+                                    print("Login berhasil untuk: ${data['user']['nama']}");
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(content: Text(data['message'] ?? "Login sukses")),
+                                    );
+                                    Navigator.pushReplacementNamed(context, '/home');
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(content: Text(data['message'] ?? "Login gagal")),
+                                    );
+                                  }
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(content: Text('Server error: ${response.statusCode}')),
+                                  );
+                                }
+                              } catch (e) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text('Error: $e')),
                                 );
                               }
                             },

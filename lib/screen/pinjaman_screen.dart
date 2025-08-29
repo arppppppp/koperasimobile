@@ -9,7 +9,6 @@ class PinjamanScreen extends StatelessWidget {
       backgroundColor: const Color(0xFFFAFAFA),
       appBar: AppBar(
         backgroundColor: const Color(0xFFFFDC16),
-        toolbarHeight: 69,
         elevation: 0,
         title: const Text(
           'Pinjaman',
@@ -836,6 +835,11 @@ class RegulerLoanContent extends StatelessWidget {
             isCompleted: true,
             loanType: 'Reguler',
           ),
+          
+          const SizedBox(height: 16),
+          
+          // Extra space for bottom navigation bar
+          const SizedBox(height: 24),
         ],
       ),
     );
@@ -848,9 +852,82 @@ class UsahaLoanContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      padding: const EdgeInsets.symmetric(vertical: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Section header
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFFFDC16).withOpacity(0.2),
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(
+                    Icons.store,
+                    color: Color(0xFF4E342E),
+                    size: 20,
+                  ),
+                ),
+                const SizedBox(width: 12),
+                const Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Pinjaman Usaha',
+                      style: TextStyle(
+                        color: Color(0xFF4E342E),
+                        fontSize: 16,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    Text(
+                      'Untuk pengembangan usaha anggota',
+                      style: TextStyle(
+                        color: Color(0xFF4E342E),
+                        fontSize: 12,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+
+          // Info card
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: const Color(0xFFFFF9C4),
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: const Color(0xFFFFDC16).withOpacity(0.5)),
+            ),
+            child: const Row(
+              children: [
+                Icon(Icons.info_outline, color: Color(0xFF4E342E)),
+                SizedBox(width: 12),
+                Expanded(
+                  child: Text(
+                    'Pinjaman khusus untuk pengembangan usaha dengan suku bunga 0.5% per bulan, tenor hingga 36 bulan',
+                    style: TextStyle(
+                      color: Color(0xFF4E342E),
+                      fontSize: 12,
+                      fontFamily: 'Poppins',
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          
           // Section divider
           const SectionDivider(title: 'Riwayat Pinjaman Usaha'),
 
@@ -863,6 +940,19 @@ class UsahaLoanContent extends StatelessWidget {
             isCompleted: false,
             loanType: 'Usaha',
           ),
+          
+          const SizedBox(height: 16),
+          
+          // Total loan summary card
+          const TotalLoanSummaryCard(
+            totalAmount: '5.000.000',
+            duration: '10 Bulan',
+            loanType: 'Usaha',
+            interestRate: '0.5% per bulan',
+          ),
+          
+          // Extra space for bottom navigation bar
+          const SizedBox(height: 24),
         ],
       ),
     );

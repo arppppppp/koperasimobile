@@ -29,7 +29,7 @@ class _SimpananScreenState extends State<SimpananScreen>
       backgroundColor: const Color(0xFFFAFAFA),
       appBar: AppBar(
         backgroundColor: const Color(0xFFFFDC16),
-        toolbarHeight: 69,
+        toolbarHeight: 56, 
         elevation: 0,
         title: const Text(
           'Simpanan',

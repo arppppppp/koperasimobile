@@ -126,8 +126,10 @@ class _HistoryScreenState extends State<HistoryScreen>
                           border: Border.all(
                             color:
                                 isSelected
-                                    ? const Color(0xFFFFDC16)
-                                    : Colors.grey.shade300,
+                                   
+                            ? const Color(0xFFFFDC16)
+                                   
+                            : Colors.grey.shade300,
                           ),
                         ),
                         child: Text(
@@ -135,10 +137,14 @@ class _HistoryScreenState extends State<HistoryScreen>
                           style: TextStyle(
                             color:
                                 isSelected
-                                    ? const Color(0xFF4E342E)
-                                    : Colors.grey,
+                                   
+                            ? const Color(0xFF4E342E)
+                                   
+                            : Colors.grey,
                             fontWeight:
-                                isSelected ? FontWeight.w600 : FontWeight.w400,
+                                isSelected
+                            ? FontWeight.w600
+                            : FontWeight.w400,
                           ),
                         ),
                       ),
@@ -241,6 +247,11 @@ class _HistoryScreenState extends State<HistoryScreen>
     List<Map<String, dynamic>> transactions,
     String emptyMsg,
   ) {
+    return _buildTransactionList(transactions, 'Tidak ada riwayat pinjaman');
+  }
+
+  Widget _buildTransactionList(
+      List<Map<String, dynamic>> transactions, String emptyMsg) {
     return transactions.isEmpty
         ? _buildEmptyState(emptyMsg)
         : ListView.builder(
@@ -332,8 +343,10 @@ class _HistoryScreenState extends State<HistoryScreen>
                         style: TextStyle(
                           color:
                               amount.contains('+')
-                                  ? Colors.green
-                                  : const Color(0xFF4E342E),
+                                 
+                              ? Colors.green
+                                 
+                              : const Color(0xFF4E342E),
                           fontSize: 16,
                           fontWeight: FontWeight.w700,
                         ),
@@ -350,7 +363,8 @@ class _HistoryScreenState extends State<HistoryScreen>
                     children: [
                       const Icon(
                         Icons.calendar_today,
-                        size: 14,
+                       
+                          size: 14,
                         color: Colors.grey,
                       ),
                       const SizedBox(width: 4),
@@ -364,7 +378,8 @@ class _HistoryScreenState extends State<HistoryScreen>
                       const SizedBox(width: 12),
                       const Icon(
                         Icons.access_time,
-                        size: 14,
+                       
+                          size: 14,
                         color: Colors.grey,
                       ),
                       const SizedBox(width: 4),
